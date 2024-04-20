@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Player_Info" load_steps=2 format=3 uid="uid://dc2dat8w3mr2l"]
+
+[ext_resource type="Script" path="res://data/player_info.gd" id="1_rf7yw"]
+
+[resource]
+script = ExtResource("1_rf7yw")
+player_name = "Arata"
+base_hp = 100
+base_mana = 100
+base_atk = 100
+base_def = 100
+base_spe = 111
+base_eva = 5
+card_position = 2
+submenu = {
+"Combatti": ["R", "T"],
+"Memoria": ["C", "D"]
+}

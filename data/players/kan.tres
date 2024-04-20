@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Player_Info" load_steps=2 format=3 uid="uid://bl4p3innwucl7"]
+
+[ext_resource type="Script" path="res://data/player_info.gd" id="1_fwh64"]
+
+[resource]
+script = ExtResource("1_fwh64")
+player_name = "Kan"
+base_hp = 100
+base_mana = 100
+base_atk = 100
+base_def = 100
+base_spe = 87
+base_eva = 5
+card_position = 0
+submenu = {
+"Combatti": ["A", "B"],
+"Memoria": ["C", "D"]
+}

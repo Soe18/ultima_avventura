@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cngojrqclp1k4"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_li23o"]
+[ext_resource type="Texture2D" uid="uid://cd2dmqflg3h4m" path="res://assets/ui/chara_card.png" id="2_0l1ca"]
+[ext_resource type="Texture2D" uid="uid://cy3ggjrjjw3gw" path="res://assets/ui/chara_selected.png" id="3_1r865"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_li23o")
+
+[node name="PlayerCard" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="FrontCard" type="Node2D" parent="PlayerCard"]
+
+[node name="Container" type="Sprite2D" parent="PlayerCard/FrontCard"]
+texture = ExtResource("2_0l1ca")
+
+[node name="ActiveContainer" type="Sprite2D" parent="PlayerCard/FrontCard"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("3_1r865")
+
+[node name="EmotionBanner" type="Sprite2D" parent="PlayerCard/FrontCard"]
+
+[node name="CharaImg" type="Sprite2D" parent="PlayerCard/FrontCard"]
+
+[node name="CharaBg" type="Sprite2D" parent="PlayerCard/FrontCard"]
+
+[node name="BackCard" type="Node2D" parent="PlayerCard"]

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Player_Info" load_steps=2 format=3 uid="uid://41dlb3n6akho"]
+
+[ext_resource type="Script" path="res://data/player_info.gd" id="1_ae5pn"]
+
+[resource]
+script = ExtResource("1_ae5pn")
+player_name = "Asphile"
+base_hp = 100
+base_mana = 100
+base_atk = 100
+base_def = 100
+base_spe = 75
+base_eva = 5
+card_position = 1
+submenu = {
+"Combatti": ["E", "F"],
+"Memoria": ["C", "D"]
+}

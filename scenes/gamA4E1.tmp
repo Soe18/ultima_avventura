@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi36inx7suyd0"]
+
+[ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_x6mku"]
+[ext_resource type="PackedScene" uid="uid://cngojrqclp1k4" path="res://scenes/player.tscn" id="2_f1cx6"]
+[ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="2_s4g2t"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="3_j4r2f"]
+[ext_resource type="Texture2D" uid="uid://bvsto3uv2mnfu" path="res://assets/boss/sprite/bbp.png" id="4_5umtw"]
+[ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="5_3j544"]
+[ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/boss.tscn" id="6_6k7b8"]
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource("1_x6mku")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(320, 180)
+scale = Vector2(5, 2.812)
+texture = ExtResource("2_s4g2t")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(320, 180)
+
+[node name="Players" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Kan" parent="Players" instance=ExtResource("2_f1cx6")]
+base_spe = 80
+
+[node name="Asphile" parent="Players" instance=ExtResource("2_f1cx6")]
+player_name = "Asphile"
+base_spe = 75
+card_position = 1
+submenu = {
+"Combatti": ["E", "F"],
+"Memoria": ["C", "D"]
+}
+
+[node name="Arata" parent="Players" instance=ExtResource("2_f1cx6")]
+player_name = "Arata"
+base_spe = 109
+card_position = 2
+submenu = {
+"Combatti": ["R", "T"],
+"Memoria": ["C", "D"]
+}
+
+[node name="Menu" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 4
+script = ExtResource("3_j4r2f")
+
+[node name="MenuBox" type="Sprite2D" parent="Menu"]
+position = Vector2(320, 305)
+texture = ExtResource("5_3j544")
+
+[node name="TopLeftLabel" type="Label" parent="Menu"]
+offset_left = 213.0
+offset_top = 271.0
+offset_right = 253.0
+offset_bottom = 294.0
+
+[node name="TopRightLabel" type="Label" parent="Menu"]
+offset_left = 362.0
+offset_top = 272.0
+offset_right = 402.0
+offset_bottom = 295.0
+
+[node name="BottomLeftLabel" type="Label" parent="Menu"]
+offset_left = 218.0
+offset_top = 323.0
+offset_right = 258.0
+offset_bottom = 346.0
+
+[node name="BottomRightLabel" type="Label" parent="Menu"]
+offset_left = 353.0
+offset_top = 323.0
+offset_right = 393.0
+offset_bottom = 346.0
+
+[node name="Puntatore" type="Sprite2D" parent="Menu"]
+unique_name_in_owner = true
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_s4g2t")
+
+[node name="Markers" type="Node" parent="Menu"]
+
+[node name="TopLeft" type="Marker2D" parent="Menu/Markers"]
+position = Vector2(192, 282)
+
+[node name="TopRight" type="Marker2D" parent="Menu/Markers"]
+position = Vector2(335, 283)
+
+[node name="BottomLeft" type="Marker2D" parent="Menu/Markers"]
+position = Vector2(193, 335)
+
+[node name="BottomRight" type="Marker2D" parent="Menu/Markers"]
+position = Vector2(333, 335)
+
+[node name="Boss" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Boss" parent="Boss" instance=ExtResource("6_6k7b8")]
+param_sprite = ExtResource("4_5umtw")
+base_spe = 84
