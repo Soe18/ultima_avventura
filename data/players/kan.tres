@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_fwh64")
-player_name = "Kan"
+name = "Kan"
 base_hp = 100
 base_mana = 100
 base_atk = 100

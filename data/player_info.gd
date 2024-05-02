@@ -4,7 +4,7 @@ extends Resource
 # Informazioni generiche di un personaggio
 @export_category("Player Stats")
 @export
-var player_name : String = "Stencil"
+var name : String = "Stencil"
 @export
 var base_hp : int = 100
 @export

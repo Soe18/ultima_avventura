@@ -1,39 +1,27 @@
 extends Node2D
 
-@export var param_sprite:Texture2D
 @onready var sprite = %DefaultSprite
 @onready var healthbar = %HealthBar
 
-@export_category("Boss Stats")
-@export
-var boss_name : String = "GenericBoss"
-@export
-var base_hp : int = 100
-@export
-var base_atk : int = 100
-@export
-var base_def : int = 100
-@export
-var base_spe : int = 110
-@export
-var base_eva : int = 5
+# Informazioni generiche di un personaggio
+@export var boss_info:Boss_Info
 
-var curr_hp = base_hp
-var curr_atk = base_atk
-var curr_def = base_def
-var curr_spe = base_spe
-var curr_eva = base_eva
+@onready var curr_hp = boss_info.base_hp
+@onready var curr_atk = boss_info.base_atk
+@onready var curr_def = boss_info.base_def
+@onready var curr_spe = boss_info.base_spe
+@onready var curr_eva = boss_info.base_eva
 
 func _ready():
 	# Assegna l'immagine allo sprite
-	sprite.texture = param_sprite
+	sprite.texture = boss_info.param_sprite
 	# Centra l'immagine del boss nello schermo
-	var size = param_sprite.get_size()
+	var size = boss_info.param_sprite.get_size()
 	var viewport = get_viewport().size
 	sprite.position.x = viewport.x/2
 	sprite.position.y = viewport.y/2
-	healthbar.max_value = base_hp
-	healthbar.value = base_hp
+	healthbar.max_value = boss_info.base_hp
+	healthbar.value = boss_info.base_hp
 
 func _process(delta):
 	pass
@@ -42,4 +30,6 @@ func _process(delta):
 # Se è un valore negativo, recupera vita
 func change_health(diff):
 	curr_hp = curr_hp-diff
+	if (curr_hp<0):
+		curr_hp = 0
 	healthbar.value = curr_hp

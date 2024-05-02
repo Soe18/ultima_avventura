@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqvmtkkl3pxu0"]
+
+[ext_resource type="PackedScene" uid="uid://cngojrqclp1k4" path="res://scenes/non_editable/player.tscn" id="1_7h1n6"]
+[ext_resource type="Resource" uid="uid://bl4p3innwucl7" path="res://data/players/kan.tres" id="2_43pg1"]
+[ext_resource type="Resource" uid="uid://41dlb3n6akho" path="res://data/players/asphile.tres" id="3_mf1yb"]
+[ext_resource type="Resource" uid="uid://dc2dat8w3mr2l" path="res://data/players/arata.tres" id="4_4326v"]
+
+[node name="Players" type="Node"]
+
+[node name="Kan" parent="." instance=ExtResource("1_7h1n6")]
+player_info = ExtResource("2_43pg1")
+
+[node name="Asphile" parent="." instance=ExtResource("1_7h1n6")]
+player_info = ExtResource("3_mf1yb")
+
+[node name="Arata" parent="." instance=ExtResource("1_7h1n6")]
+player_info = ExtResource("4_4326v")

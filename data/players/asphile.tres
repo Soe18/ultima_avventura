@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_ae5pn")
-player_name = "Asphile"
+name = "Asphile"
 base_hp = 100
 base_mana = 100
 base_atk = 100

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwlrh0ccdn4m1"]
+
+[ext_resource type="Script" path="res://scripts/boss.gd" id="1_7ve6u"]
+
+[node name="Boss" type="Node2D"]
+script = ExtResource("1_7ve6u")
+
+[node name="DefaultSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 246.0
+offset_top = 21.0
+offset_right = 509.0
+offset_bottom = 48.0
+show_percentage = false
+
+[connection signal="value_changed" from="HealthBar" to="." method="_on_health_bar_value_changed"]

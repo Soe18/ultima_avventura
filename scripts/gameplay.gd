@@ -2,15 +2,16 @@ extends Node2D
 
 enum MENU_STATES {NONE, SELECT_FIELD, SELECT_SUBFIELD, SELECT_TARGET, SELECT_ALLY}
 
-var player_input = []
+var player_input : Array
 var menu_state = MENU_STATES.SELECT_FIELD
 
 @onready var menu = %Menu
-@onready var players_node = %Players
-@onready var boss = %Boss
+@onready var players_node
+@onready var boss_node = %Boss
 
 # Lista dei personaggi
-@onready var players = []
+@onready var players : Array
+@onready var boss
 # Lista del personaggio che sta scegliendo
 @onready var current_player
 # Lista del menu corrente
@@ -19,27 +20,44 @@ var menu_state = MENU_STATES.SELECT_FIELD
 # Indice del player della lista dei personaggi (players)
 var player_index = 0
 var choosing = true
-var processed_default_vars:bool = true
+var processed_default_vars_start:bool = true
+var processed_default_vars_action:bool = true
+var check_end_of_game:bool = false
+var all_attackers
+
+@onready var scene_manager = get_tree().root.get_child(0)
 
 func _ready():
-	# Dentro il nodo Players sono contenuti tutti i personaggi
-	for player in players_node.get_children():
-		players.append(player)
-		player_input.append("")
-	print(players)
-	# TODO: Sorting via ordine giocatori,
-	# Dai errore se overlappano le posizioni
-	current_player = players[player_index]
-	fields_to_be_shown = current_player.player_info.menu
-	current_player.active_borders(true)
-	
-	# Get the boss info
-	boss = %Boss.get_child(0)
+	# Put boss in scene
+	boss = boss_node.get_child(0)
+	# Put players in scene
+	add_child(players_node)
 
 func _process(delta):
 	# Reading menu
 	if choosing:
-		processed_default_vars = true
+		if processed_default_vars_start:
+			# Dentro il nodo Players sono contenuti tutti i personaggi
+			players = []
+			player_input = []
+			# Guardo i figli che ha il nodo players
+			for player in players_node.get_children():
+				# Se è vivo, lo tengo conto per
+				# l'azione di questo turno
+				if player.curr_hp>0:
+					players.append(player)
+					player_input.append("")
+			print_debug(players)
+			# TODO: Sorting via ordine giocatori,
+			# Dai errore se overlappano le posizioni
+			current_player = players[player_index]
+			fields_to_be_shown = current_player.player_info.menu
+			current_player.active_borders(true)
+			menu_state = MENU_STATES.SELECT_FIELD
+			processed_default_vars_action = true
+			processed_default_vars_start = false
+		
+		# Start the loop
 		menu.visible = true
 		menu.update_fields(fields_to_be_shown)
 		if Input.is_action_just_pressed("left"):
@@ -51,27 +69,45 @@ func _process(delta):
 		if Input.is_action_just_pressed("down"):
 			menu.move_down()
 		if Input.is_action_just_pressed("confirm"):
+			print_debug(player_input)
 			player_input[player_index] = menu.get_field()
 			manage_next_move()
 		if Input.is_action_just_pressed("deny"):
 			previous_selection()
 	else:
-		# TODO:
-		# - once
-		# 1. Controlla ordine di movimento
-		# 2. Salva array in ordine di mosse
-		# - cycled
-		# 1. Ad ogni confirm mostra animazione della mossa e via
-		if processed_default_vars:
+		if processed_default_vars_action:
+			player_index = 0
+			processed_default_vars_action = false
+			processed_default_vars_start = true
 			menu.visible = false
-			var all_attackers = players
+			all_attackers = players.duplicate()
 			all_attackers.append(boss)
-			for attacker in all_attackers:
-				print(attacker.curr_spe)
-			
-			processed_default_vars = false
-		if Input.is_action_just_pressed("confirm"):
-			show_next_action()
+			all_attackers.sort_custom(func(a,b) : return a.curr_spe > b.curr_spe)
+			# Everyone now has right orders... or not?
+			# TODO: FUNC to check if move changes action time
+		
+		if player_index >= all_attackers.size():
+			choosing = true
+			player_index = 0
+		
+		# Will do a caller
+		if Input.is_action_just_pressed("confirm") && !choosing:
+			general_damage(all_attackers[player_index])
+			player_index = player_index+1
+			check_end_of_game = true
+		
+		# Check end of game
+		if check_end_of_game:
+			if boss.curr_hp <= 0:
+				scene_manager.inc_score()
+				# Players in scene manager is a node, not an array
+				scene_manager.update_player_status(players_node)
+				scene_manager.load_between_cutscene()
+			if all_players_are_dead():
+				# change to gameover
+				scene_manager.lose()
+				scene_manager.update_player_status(players_node)
+				scene_manager.load_between_cutscene()
 
 # choosing methods
 func manage_next_move():
@@ -110,10 +146,12 @@ func next_player():
 	if player_index < players.size():
 		current_player = players[player_index]
 		menu_state = MENU_STATES.SELECT_FIELD
+		fields_to_be_shown = current_player.player_info.menu
+		current_player.active_borders(true)
 	else:
 		choosing = false
-	fields_to_be_shown = current_player.player_info.menu
-	current_player.active_borders(true)
+		# Put everything in default state
+		menu_state = MENU_STATES.SELECT_FIELD
 
 func prev_player():
 	current_player.active_borders(false)
@@ -123,9 +161,25 @@ func prev_player():
 		player_index = 0
 	current_player = players[player_index]
 	menu_state = MENU_STATES.SELECT_FIELD
-	fields_to_be_shown = current_player.menu
+	fields_to_be_shown = current_player.player_info.menu
 	current_player.active_borders(true)
 
+func is_boss(entity):
+	if entity.get_parent() == %Boss:
+		return true
+	return false
+
 # fighting methods
-func show_next_action():
-	boss.change_health(20)
+func general_damage(entity):
+	if (!is_boss(entity)):
+		boss.change_health(entity.curr_atk)
+	else:
+		var lucky_one = players.pick_random()
+		lucky_one.change_health(entity.curr_atk)
+
+# If someone is alive, not all players are dead
+func all_players_are_dead():
+	for player in players:
+		if player.curr_hp > 0:
+			return false
+	return true

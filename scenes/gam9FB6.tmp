@@ -91,4 +91,3 @@ unique_name_in_owner = true
 
 [node name="Boss" parent="Boss" instance=ExtResource("6_6k7b8")]
 param_sprite = ExtResource("4_5umtw")
-base_spe = 84
