@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_8w3y7"]
 [ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="2_1rvx5"]
-[ext_resource type="Script" path="res://scripts/menu.gd" id="3_kk7im"]
+[ext_resource type="Script" path="res://scripts/selector.gd" id="3_464or"]
 [ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="4_tnn23"]
 [ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/non_editable/boss.tscn" id="5_qofkk"]
 
@@ -17,56 +17,56 @@ texture = ExtResource("2_1rvx5")
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
 
-[node name="Menu" type="Node2D" parent="."]
+[node name="Selector" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = 4
-script = ExtResource("3_kk7im")
+script = ExtResource("3_464or")
 
-[node name="MenuBox" type="Sprite2D" parent="Menu"]
+[node name="SelectorBox" type="Sprite2D" parent="Selector"]
 position = Vector2(320, 305)
 texture = ExtResource("4_tnn23")
 
-[node name="TopLeftLabel" type="Label" parent="Menu"]
+[node name="TopLeftLabel" type="Label" parent="Selector"]
 offset_left = 213.0
 offset_top = 271.0
 offset_right = 253.0
 offset_bottom = 294.0
 
-[node name="TopRightLabel" type="Label" parent="Menu"]
+[node name="TopRightLabel" type="Label" parent="Selector"]
 offset_left = 362.0
 offset_top = 272.0
 offset_right = 402.0
 offset_bottom = 295.0
 
-[node name="BottomLeftLabel" type="Label" parent="Menu"]
+[node name="BottomLeftLabel" type="Label" parent="Selector"]
 offset_left = 218.0
 offset_top = 323.0
 offset_right = 258.0
 offset_bottom = 346.0
 
-[node name="BottomRightLabel" type="Label" parent="Menu"]
+[node name="BottomRightLabel" type="Label" parent="Selector"]
 offset_left = 353.0
 offset_top = 323.0
 offset_right = 393.0
 offset_bottom = 346.0
 
-[node name="Puntatore" type="Sprite2D" parent="Menu"]
+[node name="Pointer" type="Sprite2D" parent="Selector"]
 unique_name_in_owner = true
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_1rvx5")
 
-[node name="Markers" type="Node" parent="Menu"]
+[node name="Markers" type="Node" parent="Selector"]
 
-[node name="TopLeft" type="Marker2D" parent="Menu/Markers"]
+[node name="TopLeft" type="Marker2D" parent="Selector/Markers"]
 position = Vector2(192, 282)
 
-[node name="TopRight" type="Marker2D" parent="Menu/Markers"]
+[node name="TopRight" type="Marker2D" parent="Selector/Markers"]
 position = Vector2(335, 283)
 
-[node name="BottomLeft" type="Marker2D" parent="Menu/Markers"]
+[node name="BottomLeft" type="Marker2D" parent="Selector/Markers"]
 position = Vector2(193, 335)
 
-[node name="BottomRight" type="Marker2D" parent="Menu/Markers"]
+[node name="BottomRight" type="Marker2D" parent="Selector/Markers"]
 position = Vector2(333, 335)
 
 [node name="Boss" type="Node" parent="."]

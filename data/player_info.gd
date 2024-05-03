@@ -30,9 +30,9 @@ enum CARD_POSITION {BOTTOM_LEFT, TOP_LEFT,BOTTOM_RIGHT, TOP_RIGHT}
 @export var card_position: CARD_POSITION
 
 # Azioni possibili, sono uguali tra tutti i pg
-const menu = ["Combatti", "Recupero", "Strumenti", "Memoria"]
+const selector = ["Combatti", "Recupero", "Strumenti", "Memoria"]
 
 # Dizionario che contiene tutte le abilità univoche
 @export
-var submenu = {"Combatti":["A","B"],
+var subselector = {"Combatti":["A","B"],
 				"Memoria":["C","D"]}

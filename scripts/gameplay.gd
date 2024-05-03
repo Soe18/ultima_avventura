@@ -1,20 +1,21 @@
 extends Node2D
 
-enum MENU_STATES {NONE, SELECT_FIELD, SELECT_SUBFIELD, SELECT_TARGET, SELECT_ALLY}
+enum SELECTOR_STATES {NONE, SELECT_FIELD, SELECT_SUBFIELD, SELECT_TARGET, SELECT_ALLY}
 
 var player_input : Array
-var menu_state = MENU_STATES.SELECT_FIELD
+var selector_state = SELECTOR_STATES.SELECT_FIELD
 
-@onready var menu = %Menu
+@onready var selector = %Selector
 @onready var players_node
 @onready var boss_node = %Boss
+var boss_tres
 
 # Lista dei personaggi
 @onready var players : Array
 @onready var boss
 # Lista del personaggio che sta scegliendo
 @onready var current_player
-# Lista del menu corrente
+# Lista del selector corrente
 @onready var fields_to_be_shown
 
 # Indice del player della lista dei personaggi (players)
@@ -30,11 +31,14 @@ var all_attackers
 func _ready():
 	# Put boss in scene
 	boss = boss_node.get_child(0)
+	boss.boss_info = boss_tres
+	boss.load_data()
 	# Put players in scene
 	add_child(players_node)
+	print(boss.curr_hp)
 
 func _process(delta):
-	# Reading menu
+	# Reading selector
 	if choosing:
 		if processed_default_vars_start:
 			# Dentro il nodo Players sono contenuti tutti i personaggi
@@ -51,26 +55,26 @@ func _process(delta):
 			# TODO: Sorting via ordine giocatori,
 			# Dai errore se overlappano le posizioni
 			current_player = players[player_index]
-			fields_to_be_shown = current_player.player_info.menu
+			fields_to_be_shown = current_player.player_info.selector
 			current_player.active_borders(true)
-			menu_state = MENU_STATES.SELECT_FIELD
+			selector_state = SELECTOR_STATES.SELECT_FIELD
 			processed_default_vars_action = true
 			processed_default_vars_start = false
 		
 		# Start the loop
-		menu.visible = true
-		menu.update_fields(fields_to_be_shown)
+		selector.visible = true
+		selector.update_fields(fields_to_be_shown)
 		if Input.is_action_just_pressed("left"):
-			menu.move_left()
+			selector.move_left()
 		if Input.is_action_just_pressed("right"):
-			menu.move_right()
+			selector.move_right()
 		if Input.is_action_just_pressed("up"):
-			menu.move_up()
+			selector.move_up()
 		if Input.is_action_just_pressed("down"):
-			menu.move_down()
+			selector.move_down()
 		if Input.is_action_just_pressed("confirm"):
 			print_debug(player_input)
-			player_input[player_index] = menu.get_field()
+			player_input[player_index] = selector.get_field()
 			manage_next_move()
 		if Input.is_action_just_pressed("deny"):
 			previous_selection()
@@ -79,20 +83,22 @@ func _process(delta):
 			player_index = 0
 			processed_default_vars_action = false
 			processed_default_vars_start = true
-			menu.visible = false
+			selector.visible = false
 			all_attackers = players.duplicate()
 			all_attackers.append(boss)
 			all_attackers.sort_custom(func(a,b) : return a.curr_spe > b.curr_spe)
 			# Everyone now has right orders... or not?
 			# TODO: FUNC to check if move changes action time
-		
 		if player_index >= all_attackers.size():
 			choosing = true
 			player_index = 0
 		
 		# Will do a caller
 		if Input.is_action_just_pressed("confirm") && !choosing:
-			general_damage(all_attackers[player_index])
+			if all_attackers[player_index].curr_hp > 0:
+				general_damage(all_attackers[player_index])
+			else:
+				print_debug("he's dead...")
 			player_index = player_index+1
 			check_end_of_game = true
 		
@@ -111,33 +117,33 @@ func _process(delta):
 
 # choosing methods
 func manage_next_move():
-	# If true, let's check if we do need to open a new menu
-	if menu_state == MENU_STATES.SELECT_FIELD:
+	# If true, let's check if we do need to open a new selector
+	if selector_state == SELECTOR_STATES.SELECT_FIELD:
 		if player_input[player_index] == "Combatti" or player_input[player_index] == "Memoria":
-			menu_state = MENU_STATES.SELECT_SUBFIELD
-			fields_to_be_shown = current_player.player_info.submenu.get(player_input[player_index])
+			selector_state = SELECTOR_STATES.SELECT_SUBFIELD
+			fields_to_be_shown = current_player.player_info.subselector.get(player_input[player_index])
 		# CHECK RECUPERO E STRUMENTI
 		if player_input[player_index] == "Recupero":
 			next_player()
 	# If true, let's see if selection is done or if we do need more informations
-	elif menu_state == MENU_STATES.SELECT_SUBFIELD:
+	elif selector_state == SELECTOR_STATES.SELECT_SUBFIELD:
 		next_player()
-	elif menu_state == MENU_STATES.SELECT_TARGET:
+	elif selector_state == SELECTOR_STATES.SELECT_TARGET:
 		pass
-	elif menu_state == MENU_STATES.SELECT_ALLY:
+	elif selector_state == SELECTOR_STATES.SELECT_ALLY:
 		pass
-	menu.reset_posix()
+	selector.reset_posix()
 	print(player_input)
 	pass
 
 func previous_selection():
-	if menu_state == MENU_STATES.SELECT_SUBFIELD:
-		menu_state = MENU_STATES.SELECT_FIELD
-		fields_to_be_shown = current_player.player_info.menu
-	elif menu_state == MENU_STATES.SELECT_FIELD:
+	if selector_state == SELECTOR_STATES.SELECT_SUBFIELD:
+		selector_state = SELECTOR_STATES.SELECT_FIELD
+		fields_to_be_shown = current_player.player_info.selector
+	elif selector_state == SELECTOR_STATES.SELECT_FIELD:
 		prev_player()
-		fields_to_be_shown = current_player.player_info.menu
-	menu.reset_posix()
+		fields_to_be_shown = current_player.player_info.selector
+	selector.reset_posix()
 	pass
 
 func next_player():
@@ -145,13 +151,13 @@ func next_player():
 	player_index = (player_index+1)
 	if player_index < players.size():
 		current_player = players[player_index]
-		menu_state = MENU_STATES.SELECT_FIELD
-		fields_to_be_shown = current_player.player_info.menu
+		selector_state = SELECTOR_STATES.SELECT_FIELD
+		fields_to_be_shown = current_player.player_info.selector
 		current_player.active_borders(true)
 	else:
 		choosing = false
 		# Put everything in default state
-		menu_state = MENU_STATES.SELECT_FIELD
+		selector_state = SELECTOR_STATES.SELECT_FIELD
 
 func prev_player():
 	current_player.active_borders(false)
@@ -160,8 +166,8 @@ func prev_player():
 	if player_index < 0:
 		player_index = 0
 	current_player = players[player_index]
-	menu_state = MENU_STATES.SELECT_FIELD
-	fields_to_be_shown = current_player.player_info.menu
+	selector_state = SELECTOR_STATES.SELECT_FIELD
+	fields_to_be_shown = current_player.player_info.selector
 	current_player.active_borders(true)
 
 func is_boss(entity):

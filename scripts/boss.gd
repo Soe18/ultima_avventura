@@ -6,20 +6,26 @@ extends Node2D
 # Informazioni generiche di un personaggio
 @export var boss_info:Boss_Info
 
-@onready var curr_hp = boss_info.base_hp
-@onready var curr_atk = boss_info.base_atk
-@onready var curr_def = boss_info.base_def
-@onready var curr_spe = boss_info.base_spe
-@onready var curr_eva = boss_info.base_eva
+var curr_hp
+var curr_atk
+var curr_def
+var curr_spe
+var curr_eva
 
-func _ready():
+func load_data():
+	curr_hp = boss_info.base_hp
+	curr_atk = boss_info.base_atk
+	curr_def = boss_info.base_def
+	curr_spe = boss_info.base_spe
+	curr_eva = boss_info.base_eva
+	
 	# Assegna l'immagine allo sprite
 	sprite.texture = boss_info.param_sprite
 	# Centra l'immagine del boss nello schermo
-	var size = boss_info.param_sprite.get_size()
-	var viewport = get_viewport().size
-	sprite.position.x = viewport.x/2
-	sprite.position.y = viewport.y/2
+	sprite.position.x = 320
+	sprite.position.y = 180
+	
+	# Load healthbar
 	healthbar.max_value = boss_info.base_hp
 	healthbar.value = boss_info.base_hp
 

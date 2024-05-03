@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_d0dol")
 name = "Stencil"
-base_hp = 500
+base_hp = 200
 base_atk = 130
 base_def = 90
 base_spe = 72

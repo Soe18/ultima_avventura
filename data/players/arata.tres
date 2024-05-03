@@ -12,7 +12,7 @@ base_def = 100
 base_spe = 111
 base_eva = 5
 card_position = 2
-submenu = {
+subselector = {
 "Combatti": ["R", "T"],
 "Memoria": ["C", "D"]
 }
