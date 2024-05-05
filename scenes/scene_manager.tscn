@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4rmc4llx8n4e"]
+[gd_scene load_steps=4 format=3 uid="uid://b4rmc4llx8n4e"]
 
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_olmep"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_gp0t8"]
+[ext_resource type="Script" path="res://scripts/saver_loader.gd" id="3_vhwh1"]
 
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_olmep")
@@ -36,11 +37,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Riprendi"
 
-[node name="Load" type="Button" parent="Menu/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Carica"
-
 [node name="Save" type="Button" parent="Menu/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -51,7 +47,12 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Esci"
 
+[node name="Utils" type="Node" parent="."]
+
+[node name="SaverLoader" type="Node" parent="Utils"]
+unique_name_in_owner = true
+script = ExtResource("3_vhwh1")
+
 [connection signal="pressed" from="Menu/VBox/Continue" to="Menu" method="_on_continue_pressed"]
-[connection signal="pressed" from="Menu/VBox/Load" to="Menu" method="_on_load_pressed"]
 [connection signal="pressed" from="Menu/VBox/Save" to="Menu" method="_on_save_pressed"]
 [connection signal="pressed" from="Menu/VBox/MainMenu" to="Menu" method="_on_main_menu_pressed"]

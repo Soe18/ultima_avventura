@@ -10,7 +10,8 @@ func _on_new_game_pressed():
 	scene_manager.load_next_game()
 
 func _on_load_game_pressed():
-	pass
+	if scene_manager.load():
+		scene_manager.load_next_game()
 
 func _on_quit_game_pressed():
 	get_tree().quit()

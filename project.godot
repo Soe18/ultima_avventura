@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="L'ultima avventura"
+config/name="ultima_avventura"
+config/version="s"
 run/main_scene="res://scenes/scene_manager.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"

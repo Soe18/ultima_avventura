@@ -17,7 +17,6 @@ var curr_mana = -1
 @onready var manabar = %ManaBar
 
 func _ready():
-	print_debug("ready")
 	# Change position
 	# TODO: adjust positions and create a whole method to implement this shit
 	if player_info.card_position == player_info.CARD_POSITION.BOTTOM_LEFT:

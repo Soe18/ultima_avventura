@@ -14,10 +14,8 @@ func set_focus():
 func _on_continue_pressed():
 	scene_manager.continue_game()
 
-func _on_load_pressed():
-	scene_manager.continue_game()
-
 func _on_save_pressed():
+	scene_manager.save()
 	scene_manager.continue_game()
 
 func _on_main_menu_pressed():

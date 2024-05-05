@@ -1,2 +1,2 @@
 # ultima_avventura
-A small but extendible Godot RPG Game
+A small but extendable Godot RPG Game
