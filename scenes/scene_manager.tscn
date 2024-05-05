@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://b4rmc4llx8n4e"]
 
-[ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_50lof"]
-[ext_resource type="Script" path="res://scripts/menu.gd" id="2_5at5n"]
+[ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_olmep"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="2_gp0t8"]
 
 [node name="SceneManager" type="Node"]
-script = ExtResource("1_50lof")
+script = ExtResource("1_olmep")
 
 [node name="Menu" type="Control" parent="."]
 unique_name_in_owner = true
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_5at5n")
+script = ExtResource("2_gp0t8")
 
 [node name="VBox" type="VBoxContainer" parent="Menu"]
 layout_mode = 1

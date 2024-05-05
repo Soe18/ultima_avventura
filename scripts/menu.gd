@@ -4,22 +4,21 @@ extends Control
 @onready var _continue = %Continue
 @onready var _load = %Load
 @onready var _save = %Save
-@onready var _maimmenu = %MainMenu
-@onready var scenemanager = get_parent()
+@onready var _mainmenu = %MainMenu
+@onready var scene_manager = get_parent()
 
 func set_focus():
 	_continue.grab_focus()
 
 # Signals press
 func _on_continue_pressed():
-	scenemanager.continue_game()
+	scene_manager.continue_game()
 
 func _on_load_pressed():
-	scenemanager.continue_game()
+	scene_manager.continue_game()
 
 func _on_save_pressed():
-	scenemanager.continue_game()
+	scene_manager.continue_game()
 
 func _on_main_menu_pressed():
-	# TODO: Redirect main menu
-	get_tree().quit()
+	scene_manager.redirect_to_main_menu()

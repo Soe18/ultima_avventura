@@ -17,6 +17,5 @@ func _process(_delta):
 		if !last_message:
 			scene_manager.load_next_game()
 		else:
-			#TODO: main menu
-			get_tree().quit()
+			scene_manager.redirect_to_main_menu()
 	pass

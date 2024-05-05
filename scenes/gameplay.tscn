@@ -1,18 +1,18 @@
 [gd_scene load_steps=6 format=3 uid="uid://bi36inx7suyd0"]
 
-[ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_8w3y7"]
-[ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="2_1rvx5"]
-[ext_resource type="Script" path="res://scripts/selector.gd" id="3_464or"]
-[ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="4_tnn23"]
-[ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/non_editable/boss.tscn" id="5_qofkk"]
+[ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_g8qol"]
+[ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="2_hfgr4"]
+[ext_resource type="Script" path="res://scripts/selector.gd" id="3_ge5t2"]
+[ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="4_x5v04"]
+[ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/boss.tscn" id="5_hyr7r"]
 
 [node name="Gameplay" type="Node2D"]
-script = ExtResource("1_8w3y7")
+script = ExtResource("1_g8qol")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
 scale = Vector2(5, 2.812)
-texture = ExtResource("2_1rvx5")
+texture = ExtResource("2_hfgr4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
@@ -20,11 +20,11 @@ offset = Vector2(320, 180)
 [node name="Selector" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = 4
-script = ExtResource("3_464or")
+script = ExtResource("3_ge5t2")
 
 [node name="SelectorBox" type="Sprite2D" parent="Selector"]
 position = Vector2(320, 305)
-texture = ExtResource("4_tnn23")
+texture = ExtResource("4_x5v04")
 
 [node name="TopLeftLabel" type="Label" parent="Selector"]
 offset_left = 213.0
@@ -53,7 +53,7 @@ offset_bottom = 346.0
 [node name="Pointer" type="Sprite2D" parent="Selector"]
 unique_name_in_owner = true
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_1rvx5")
+texture = ExtResource("2_hfgr4")
 
 [node name="Markers" type="Node" parent="Selector"]
 
@@ -72,4 +72,4 @@ position = Vector2(333, 335)
 [node name="Boss" type="Node" parent="."]
 unique_name_in_owner = true
 
-[node name="Boss" parent="Boss" instance=ExtResource("5_qofkk")]
+[node name="Boss" parent="Boss" instance=ExtResource("5_hyr7r")]
