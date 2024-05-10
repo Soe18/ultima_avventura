@@ -98,8 +98,10 @@ func update_player_status(players_node):
 	print_debug(self.players.get_children())
 
 func get_boss_tres_path() -> String:
+	const multiplier = 5
 	if index_boss == -1:
-		index_boss = RandomNumberGenerator.new().randi_range(0, len(bosses)-1)
+		index_boss = RandomNumberGenerator.new().randi_range(0, len(bosses)*multiplier)
+		index_boss = index_boss%len(bosses)
 	return bosses_route+bosses[index_boss]
 
 func redirect_to_main_menu():
@@ -109,7 +111,9 @@ func redirect_to_main_menu():
 	menu.process_mode = Node.PROCESS_MODE_DISABLED
 	full_main_menu_load()
 
+# Called in _ready func
 func full_main_menu_load():
+	ongame = false
 	score = 0
 	# Initialize players
 	players = preload(players_route).instantiate()
