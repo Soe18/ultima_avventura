@@ -38,6 +38,7 @@ func _ready():
 	print(boss.curr_hp)
 
 func _process(delta):
+	
 	# Reading selector
 	if choosing:
 		if processed_default_vars_start:
@@ -96,6 +97,11 @@ func _process(delta):
 		# Will do a caller
 		if Input.is_action_just_pressed("confirm") && !choosing:
 			if all_attackers[player_index].curr_hp > 0:
+				# Borked!
+				# Doesn't work because of boss
+				# Doens't get to print_debug()
+				if all_attackers[player_index] in all_attackers[player_index].player_info.subselector.get("Memoria"):
+					print_debug()
 				general_damage(all_attackers[player_index])
 			else:
 				print_debug("he's dead...")
@@ -119,14 +125,25 @@ func _process(delta):
 func manage_next_move():
 	# If true, let's check if we do need to open a new selector
 	if selector_state == SELECTOR_STATES.SELECT_FIELD:
-		if player_input[player_index] == "Combatti" or player_input[player_index] == "Memoria":
+		if player_input[player_index] == "Combatti":
 			selector_state = SELECTOR_STATES.SELECT_SUBFIELD
 			fields_to_be_shown = current_player.player_info.subselector.get(player_input[player_index])
-		# CHECK RECUPERO E STRUMENTI
+		# recupero does not need to have further informations
 		if player_input[player_index] == "Recupero":
 			next_player()
+		# For strumenti we need to check that there are enough items to choose
+		# This also applies to memoria
+		if player_input[player_index] == "Memoria":
+			if len(current_player.player_info.subselector.get(player_input[player_index]))>0:
+				# Inbound means it's in his way to be deleted, but might not be
+				selector_state = SELECTOR_STATES.SELECT_SUBFIELD
+				fields_to_be_shown = current_player.player_info.subselector.get(player_input[player_index])
+			else:
+				# Play a strange sound
+				var something = 23
 	# If true, let's see if selection is done or if we do need more informations
 	elif selector_state == SELECTOR_STATES.SELECT_SUBFIELD:
+		# If we have chosen a memoria, we need to save the deletion of the memoria
 		next_player()
 	elif selector_state == SELECTOR_STATES.SELECT_TARGET:
 		pass
