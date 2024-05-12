@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Itemlist" load_steps=2 format=3 uid="uid://cxd0gvobver6i"]
+
+[ext_resource type="Script" path="res://data/itemlist.gd" id="1_lsmsk"]
+
+[resource]
+script = ExtResource("1_lsmsk")
+itemlist = Array[String](["Panino", "Panino", "Panino", "Acqua", "Acqua", "Scacciaspiriti"])

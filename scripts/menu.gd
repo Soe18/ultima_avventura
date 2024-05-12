@@ -2,7 +2,6 @@ extends Control
 
 # Changed because 'continue' it's a key word
 @onready var _continue = %Continue
-@onready var _load = %Load
 @onready var _save = %Save
 @onready var _mainmenu = %MainMenu
 @onready var scene_manager = get_parent()

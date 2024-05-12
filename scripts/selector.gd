@@ -1,6 +1,6 @@
 extends Node2D
 
-# '-' means null value
+# '-' means null value, AND cannot be selected
 
 # WORK BEFORE ON CHARACTER CLASS AND DYNAMICALLY LOAD THE MENUS
 var curr_selection = Vector2(0,0)
@@ -108,8 +108,12 @@ func update_view():
 	$BottomRightLabel.text = actual_matrix[1][1]
 	pass
 
+# Returns false if value is "-"
 func get_field():
-	return actual_matrix[curr_selection.y][curr_selection.x]
+	var val = actual_matrix[curr_selection.y][curr_selection.x]
+	if val == "-":
+		val = false
+	return val
 	
 func reset_posix():
 	curr_selection.x = 0

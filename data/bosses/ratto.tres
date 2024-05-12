@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_txs1g")
 name = "Ratto"
-base_hp = 500
+base_hp = 240
 base_atk = 70
 base_def = 100
 base_spe = 100

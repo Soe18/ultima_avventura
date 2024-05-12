@@ -10,6 +10,9 @@ var curr_mana = -1
 @onready var curr_spe = player_info.base_spe
 @onready var curr_eva = player_info.base_eva
 
+var curr_sel = ""
+var menu_sel = ""
+
 @onready var active_container = %ActiveContainer
 @onready var player_card = %PlayerCard
 
@@ -37,7 +40,7 @@ func _ready():
 		curr_hp = player_info.base_hp
 	if curr_mana == -1: # First game
 		curr_mana = player_info.base_mana
-	
+
 	healthbar.max_value = player_info.base_hp
 	healthbar.value = player_info.base_hp
 	
@@ -46,9 +49,6 @@ func _ready():
 
 func active_borders(visibility):
 	active_container.visible = visibility
-
-func _process(delta):
-	pass
 
 # diff identifica la differenza
 # Se è un valore negativo, recupera vita
@@ -72,3 +72,9 @@ func set_mana(mana):
 	if (mana<0):
 		mana = 0
 	manabar.value = mana
+
+func set_memories(memories):
+	player_info.subselector["Memoria"] = memories
+
+func forget_the_memory():
+	player_info.subselector.get("Memoria").erase(curr_sel)

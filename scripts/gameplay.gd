@@ -3,7 +3,10 @@ extends Node2D
 enum SELECTOR_STATES {NONE, SELECT_FIELD, SELECT_SUBFIELD, SELECT_TARGET, SELECT_ALLY}
 
 var player_input : Array
+# Saves the input of the whole category, not just the value of it
+var category_input : Array
 var selector_state = SELECTOR_STATES.SELECT_FIELD
+var itemlist : Itemlist
 
 @onready var selector = %Selector
 @onready var players_node
@@ -35,7 +38,6 @@ func _ready():
 	boss.load_data()
 	# Put players in scene
 	add_child(players_node)
-	print(boss.curr_hp)
 
 func _process(delta):
 	
@@ -47,14 +49,16 @@ func _process(delta):
 			player_input = []
 			# Guardo i figli che ha il nodo players
 			for player in players_node.get_children():
-				# Se è vivo, lo tengo conto per
-				# l'azione di questo turno
+				# For each array of players, we need to
+				# populate them, else finding with
+				# player_index will throw an error
 				if player.curr_hp>0:
 					players.append(player)
 					player_input.append("")
+					category_input.append("")
 			print_debug(players)
-			# TODO: Sorting via ordine giocatori,
-			# Dai errore se overlappano le posizioni
+			# TODO: Dai errore se overlappano le posizioni
+			# Si puo' fare anche da scene manager
 			current_player = players[player_index]
 			fields_to_be_shown = current_player.player_info.selector
 			current_player.active_borders(true)
@@ -74,9 +78,11 @@ func _process(delta):
 		if Input.is_action_just_pressed("down"):
 			selector.move_down()
 		if Input.is_action_just_pressed("confirm"):
-			print_debug(player_input)
-			player_input[player_index] = selector.get_field()
-			manage_next_move()
+			if selector.get_field():
+				category_input[player_index] = player_input[player_index]
+				player_input[player_index] = selector.get_field()
+				print_debug(category_input)
+				manage_next_move()
 		if Input.is_action_just_pressed("deny"):
 			previous_selection()
 	else:
@@ -86,22 +92,36 @@ func _process(delta):
 			processed_default_vars_start = true
 			selector.visible = false
 			all_attackers = players.duplicate()
+			var i = 0
+			for attacker in all_attackers:
+				attacker.curr_sel = player_input[i]
+				i = i+1
 			all_attackers.append(boss)
 			all_attackers.sort_custom(func(a,b) : return a.curr_spe > b.curr_spe)
 			# Everyone now has right orders... or not?
 			# TODO: FUNC to check if move changes action time
 		if player_index >= all_attackers.size():
+			# Anyone who died shall return the items they took
+			itemlist.return_items()
+			# Set var to enable new turn
 			choosing = true
 			player_index = 0
 		
 		# Will do a caller
 		if Input.is_action_just_pressed("confirm") && !choosing:
 			if all_attackers[player_index].curr_hp > 0:
-				# Borked!
-				# Doesn't work because of boss
-				# Doens't get to print_debug()
-				if all_attackers[player_index] in all_attackers[player_index].player_info.subselector.get("Memoria"):
-					print_debug()
+				if all_attackers[player_index].curr_sel != "-":
+					# Now it's a player attacking
+					if all_attackers[player_index].menu_sel == "Memoria":
+						# Attacker used a memory
+						# Delete the memory entry
+						all_attackers[player_index].forget_the_memory()
+					elif all_attackers[player_index].menu_sel == "Strumenti":
+						itemlist.confirm_del_item(all_attackers[player_index].curr_sel)
+				else:
+					# Now it's the boss attacking
+					pass
+				# This has to be moved or either deleted
 				general_damage(all_attackers[player_index])
 			else:
 				print_debug("he's dead...")
@@ -115,6 +135,9 @@ func _process(delta):
 				# Players in scene manager is a node, not an array
 				scene_manager.update_player_status(players_node)
 				scene_manager.load_between_cutscene()
+				
+				# Not used items (because fight finished earlier) returns
+				itemlist.return_items()
 			if all_players_are_dead():
 				# change to gameover
 				scene_manager.lose()
@@ -125,33 +148,29 @@ func _process(delta):
 func manage_next_move():
 	# If true, let's check if we do need to open a new selector
 	if selector_state == SELECTOR_STATES.SELECT_FIELD:
-		if player_input[player_index] == "Combatti":
+		if player_input[player_index] == "Combatti" or player_input[player_index] == "Memoria":
 			selector_state = SELECTOR_STATES.SELECT_SUBFIELD
 			fields_to_be_shown = current_player.player_info.subselector.get(player_input[player_index])
 		# recupero does not need to have further informations
 		if player_input[player_index] == "Recupero":
 			next_player()
-		# For strumenti we need to check that there are enough items to choose
-		# This also applies to memoria
-		if player_input[player_index] == "Memoria":
-			if len(current_player.player_info.subselector.get(player_input[player_index]))>0:
-				# Inbound means it's in his way to be deleted, but might not be
-				selector_state = SELECTOR_STATES.SELECT_SUBFIELD
-				fields_to_be_shown = current_player.player_info.subselector.get(player_input[player_index])
-			else:
-				# Play a strange sound
-				var something = 23
+		# For strumenti we need to open another menu
+		if player_input[player_index] == "Strumenti":
+			selector_state = SELECTOR_STATES.SELECT_SUBFIELD
+			fields_to_be_shown = itemlist.arrify() # Returns a simple array from the resource
+			
 	# If true, let's see if selection is done or if we do need more informations
 	elif selector_state == SELECTOR_STATES.SELECT_SUBFIELD:
-		# If we have chosen a memoria, we need to save the deletion of the memoria
+		# Let's manage the deletion entry for strumenti
+		if category_input[player_index] == "Strumenti":
+			itemlist.del_item(player_input[player_index])
+		players[player_index].menu_sel = category_input[player_index]
 		next_player()
 	elif selector_state == SELECTOR_STATES.SELECT_TARGET:
 		pass
 	elif selector_state == SELECTOR_STATES.SELECT_ALLY:
 		pass
 	selector.reset_posix()
-	print(player_input)
-	pass
 
 func previous_selection():
 	if selector_state == SELECTOR_STATES.SELECT_SUBFIELD:
@@ -182,6 +201,12 @@ func prev_player():
 	player_index = (player_index-1)
 	if player_index < 0:
 		player_index = 0
+	# if item selected, put it back
+	if category_input[player_index] == "Strumenti":
+		# Means we have selected an item
+		# It might not be the case, but
+		# this method will check it for us
+		itemlist.restore_just_last_item()
 	current_player = players[player_index]
 	selector_state = SELECTOR_STATES.SELECT_FIELD
 	fields_to_be_shown = current_player.player_info.selector

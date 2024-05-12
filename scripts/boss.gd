@@ -12,6 +12,8 @@ var curr_def
 var curr_spe
 var curr_eva
 
+const curr_sel = "-"
+
 func load_data():
 	curr_hp = boss_info.base_hp
 	curr_atk = boss_info.base_atk

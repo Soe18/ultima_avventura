@@ -36,3 +36,4 @@ const selector = ["Combatti", "Recupero", "Strumenti", "Memoria"]
 @export
 var subselector = {"Combatti":["A","B"],
 				"Memoria":["C","D"]}
+
