@@ -25,7 +25,7 @@ func load_data():
 	sprite.texture = boss_info.param_sprite
 	# Centra l'immagine del boss nello schermo
 	sprite.position.x = 320
-	sprite.position.y = 180
+	sprite.position.y = 195
 	
 	# Load healthbar
 	healthbar.max_value = boss_info.base_hp
@@ -36,7 +36,7 @@ func _process(delta):
 
 # diff identifica la differenza
 # Se è un valore negativo, recupera vita
-func change_health(diff):
+func receive_damage(diff):
 	curr_hp = curr_hp-diff
 	if (curr_hp<0):
 		curr_hp = 0

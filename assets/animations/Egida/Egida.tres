@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://c18gviays4oh4"]
+
+[ext_resource type="Texture2D" uid="uid://bfy8jktebi5np" path="res://assets/animations/Egida/Egida.png" id="1_slt4g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oeagq"]
+atlas = ExtResource("1_slt4g")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y17du"]
+atlas = ExtResource("1_slt4g")
+region = Rect2(0, 180, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ma70d"]
+atlas = ExtResource("1_slt4g")
+region = Rect2(0, 360, 320, 180)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oeagq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y17du")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ma70d")
+}],
+"loop": true,
+"name": &"anim",
+"speed": 5.0
+}]

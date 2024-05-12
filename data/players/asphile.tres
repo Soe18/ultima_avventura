@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Player_Info" load_steps=2 format=3 uid="uid://41dlb3n6akho"]
+[gd_resource type="Resource" script_class="Player_Info" load_steps=3 format=3 uid="uid://41dlb3n6akho"]
 
 [ext_resource type="Script" path="res://data/player_info.gd" id="1_ae5pn"]
+[ext_resource type="Texture2D" uid="uid://dvb03lkwxvag6" path="res://assets/players/asphile.png" id="1_nnsrl"]
 
 [resource]
 script = ExtResource("1_ae5pn")
 name = "Asphile"
+image = ExtResource("1_nnsrl")
 base_hp = 100
 base_mana = 100
 base_atk = 100
@@ -13,6 +15,6 @@ base_spe = 75
 base_eva = 5
 card_position = 1
 subselector = {
-"Combatti": ["E", "F"],
-"Memoria": ["C", "D"]
+"Combatti": ["Elira", "Distrai"],
+"Memoria": ["Liv", "Syros"]
 }

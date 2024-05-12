@@ -14,32 +14,37 @@ var curr_sel = ""
 var menu_sel = ""
 
 @onready var active_container = %ActiveContainer
-@onready var player_card = %PlayerCard
 
 @onready var healthbar = %HealthBar
 @onready var manabar = %ManaBar
+@onready var chara_img = %CharaImg
 
 func _ready():
+	var halved_card_size = Vector2(45, 75)
+	var height_helpbar = 15
 	# Change position
 	# TODO: adjust positions and create a whole method to implement this shit
 	if player_info.card_position == player_info.CARD_POSITION.BOTTOM_LEFT:
-		player_card.position.x = 52
-		player_card.position.y = 280
+		position.x = halved_card_size.x
+		position.y = get_viewport_rect().size.y-halved_card_size.y
 	if player_info.card_position == player_info.CARD_POSITION.BOTTOM_RIGHT:
-		player_card.position.x = +437+150
-		player_card.position.y = 280
+		position.x = get_viewport_rect().size.x-halved_card_size.x
+		position.y = get_viewport_rect().size.y-halved_card_size.y
 	if player_info.card_position == player_info.CARD_POSITION.TOP_LEFT:
-		player_card.position.x = 52
-		player_card.position.y = 75
+		position.x = halved_card_size.x
+		position.y = halved_card_size.y+height_helpbar
 	if player_info.card_position == player_info.CARD_POSITION.TOP_RIGHT:
-		player_card.position.x = +437+150
-		player_card.position.y = +75
+		position.x = get_viewport_rect().size.x-halved_card_size.x
+		position.y = halved_card_size.y+height_helpbar
 	
 	# Manage health
 	if curr_hp == -1: # First game
 		curr_hp = player_info.base_hp
 	if curr_mana == -1: # First game
 		curr_mana = player_info.base_mana
+	
+	# Let's show its image!
+	chara_img.texture = player_info.image
 
 	healthbar.max_value = player_info.base_hp
 	healthbar.value = player_info.base_hp
@@ -52,7 +57,7 @@ func active_borders(visibility):
 
 # diff identifica la differenza
 # Se è un valore negativo, recupera vita
-func change_health(diff):
+func receive_damage(diff):
 	print(player_info.name)
 	curr_hp = curr_hp-diff
 	if (curr_hp<0):

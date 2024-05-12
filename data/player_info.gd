@@ -2,9 +2,14 @@ class_name Player_Info
 extends Resource
 
 # Informazioni generiche di un personaggio
-@export_category("Player Stats")
+
+@export_category("Player Details")
 @export
 var name : String = "Stencil"
+@export
+var image : CompressedTexture2D
+
+@export_category("Player Stats")
 @export
 var base_hp : int = 100
 @export
@@ -25,7 +30,7 @@ var emotion = "neutral"
 @export_category("Player Utils")
 
 # Permette di scegliere sia l'ordine di scelta della mossa che di visualizzazione
-# L'ordine in CARD_POSITION indica l'ordine di azione (AHAHAHAHAH NO)
+# L'ordine in CARD_POSITION indica l'ordine di azione
 enum CARD_POSITION {BOTTOM_LEFT, TOP_LEFT,BOTTOM_RIGHT, TOP_RIGHT}
 @export var card_position: CARD_POSITION
 
@@ -36,4 +41,3 @@ const selector = ["Combatti", "Recupero", "Strumenti", "Memoria"]
 @export
 var subselector = {"Combatti":["A","B"],
 				"Memoria":["C","D"]}
-

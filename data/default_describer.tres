@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Describer" load_steps=2 format=3 uid="uid://dv08yj5wev20t"]
+
+[ext_resource type="Script" path="res://scripts/describer.gd" id="1_6cj4g"]
+
+[resource]
+script = ExtResource("1_6cj4g")
+abilities_list = {
+"-": "Null",
+"Fulmato": "Pugno intriso di fulmini. Esaurisce tutto il mana, più mana aveva, più danno fa.",
+"Tuonaga": "Scarica elettrica che infligge grossi danni al nemico. Aumenta il suo attacco. Alto consumo di mana."
+}

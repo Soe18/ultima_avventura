@@ -1,5 +1,8 @@
 extends Node2D
 
+@export_category("Describer")
+@export var describer : Describer
+
 enum SELECTOR_STATES {NONE, SELECT_FIELD, SELECT_SUBFIELD, SELECT_TARGET, SELECT_ALLY}
 
 var player_input : Array
@@ -9,6 +12,9 @@ var selector_state = SELECTOR_STATES.SELECT_FIELD
 var itemlist : Itemlist
 
 @onready var selector = %Selector
+@onready var descriptor = %Descriptor
+@onready var abilities = %Abilities
+
 @onready var players_node
 @onready var boss_node = %Boss
 var boss_tres
@@ -24,6 +30,7 @@ var boss_tres
 # Indice del player della lista dei personaggi (players)
 var player_index = 0
 var choosing = true
+var animation_playing = false
 var processed_default_vars_start:bool = true
 var processed_default_vars_action:bool = true
 var check_end_of_game:bool = false
@@ -69,6 +76,10 @@ func _process(delta):
 		# Start the loop
 		selector.visible = true
 		selector.update_fields(fields_to_be_shown)
+		if selector_state == SELECTOR_STATES.SELECT_SUBFIELD:
+			descriptor.load_descr(selector.get_field())
+		else:
+			descriptor.default_dialogue(current_player.name)
 		if Input.is_action_just_pressed("left"):
 			selector.move_left()
 		if Input.is_action_just_pressed("right"):
@@ -87,6 +98,7 @@ func _process(delta):
 			previous_selection()
 	else:
 		if processed_default_vars_action:
+			descriptor.reset_text()
 			player_index = 0
 			processed_default_vars_action = false
 			processed_default_vars_start = true
@@ -100,15 +112,15 @@ func _process(delta):
 			all_attackers.sort_custom(func(a,b) : return a.curr_spe > b.curr_spe)
 			# Everyone now has right orders... or not?
 			# TODO: FUNC to check if move changes action time
-		if player_index >= all_attackers.size():
+		if Input.is_action_just_pressed("confirm") and player_index >= all_attackers.size():
 			# Anyone who died shall return the items they took
 			itemlist.return_items()
 			# Set var to enable new turn
 			choosing = true
 			player_index = 0
 		
-		# Will do a caller
-		if Input.is_action_just_pressed("confirm") && !choosing:
+		if Input.is_action_just_pressed("confirm") && !choosing and not animation_playing:
+			descriptor.reset_text()
 			if all_attackers[player_index].curr_hp > 0:
 				if all_attackers[player_index].curr_sel != "-":
 					# Now it's a player attacking
@@ -118,11 +130,10 @@ func _process(delta):
 						all_attackers[player_index].forget_the_memory()
 					elif all_attackers[player_index].menu_sel == "Strumenti":
 						itemlist.confirm_del_item(all_attackers[player_index].curr_sel)
+					abilities.do_ability(all_attackers[player_index])
 				else:
 					# Now it's the boss attacking
-					pass
-				# This has to be moved or either deleted
-				general_damage(all_attackers[player_index])
+					abilities.do_ability(all_attackers[player_index])
 			else:
 				print_debug("he's dead...")
 			player_index = player_index+1
@@ -152,10 +163,10 @@ func manage_next_move():
 			selector_state = SELECTOR_STATES.SELECT_SUBFIELD
 			fields_to_be_shown = current_player.player_info.subselector.get(player_input[player_index])
 		# recupero does not need to have further informations
-		if player_input[player_index] == "Recupero":
+		elif player_input[player_index] == "Recupero":
 			next_player()
 		# For strumenti we need to open another menu
-		if player_input[player_index] == "Strumenti":
+		elif player_input[player_index] == "Strumenti":
 			selector_state = SELECTOR_STATES.SELECT_SUBFIELD
 			fields_to_be_shown = itemlist.arrify() # Returns a simple array from the resource
 			
@@ -216,14 +227,6 @@ func is_boss(entity):
 	if entity.get_parent() == %Boss:
 		return true
 	return false
-
-# fighting methods
-func general_damage(entity):
-	if (!is_boss(entity)):
-		boss.change_health(entity.curr_atk)
-	else:
-		var lucky_one = players.pick_random()
-		lucky_one.change_health(entity.curr_atk)
 
 # If someone is alive, not all players are dead
 func all_players_are_dead():

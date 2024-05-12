@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="Player_Info" load_steps=2 format=3 uid="uid://dc2dat8w3mr2l"]
+[gd_resource type="Resource" script_class="Player_Info" load_steps=3 format=3 uid="uid://dc2dat8w3mr2l"]
 
 [ext_resource type="Script" path="res://data/player_info.gd" id="1_rf7yw"]
+[ext_resource type="Texture2D" uid="uid://ht6w1y0vmqci" path="res://assets/players/arata.png" id="1_si51h"]
 
 [resource]
 script = ExtResource("1_rf7yw")
 name = "Arata"
+image = ExtResource("1_si51h")
 base_hp = 100
 base_mana = 100
 base_atk = 100
@@ -13,6 +15,6 @@ base_spe = 111
 base_eva = 5
 card_position = 2
 subselector = {
-"Combatti": ["R", "T"],
-"Memoria": ["C", "D"]
+"Combatti": ["Fuoca", "Egida"],
+"Memoria": ["Hideki", "Yoku"]
 }

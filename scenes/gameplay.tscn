@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi36inx7suyd0"]
+[gd_scene load_steps=9 format=3 uid="uid://bi36inx7suyd0"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_g8qol"]
+[ext_resource type="Resource" uid="uid://dv08yj5wev20t" path="res://data/default_describer.tres" id="2_67u4m"]
 [ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="2_hfgr4"]
 [ext_resource type="Script" path="res://scripts/selector.gd" id="3_ge5t2"]
+[ext_resource type="Script" path="res://scripts/descriptor.gd" id="4_ilxao"]
 [ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="4_x5v04"]
 [ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/boss.tscn" id="5_hyr7r"]
+[ext_resource type="Script" path="res://scripts/abilities.gd" id="8_yr2s6"]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_g8qol")
+describer = ExtResource("2_67u4m")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
@@ -17,38 +21,66 @@ texture = ExtResource("2_hfgr4")
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
 
+[node name="Descriptor" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 4
+position = Vector2(320, 65)
+texture = ExtResource("4_x5v04")
+script = ExtResource("4_ilxao")
+
+[node name="Title" type="Label" parent="Descriptor"]
+unique_name_in_owner = true
+offset_left = -139.0
+offset_top = -39.0
+offset_right = 114.0
+offset_bottom = -9.0
+text = "asdasd"
+
+[node name="Description" type="Label" parent="Descriptor"]
+unique_name_in_owner = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = -55.0
+offset_right = 141.0
+offset_bottom = -10.0
+grow_vertical = 2
+text = "asdasd"
+autowrap_mode = 3
+
 [node name="Selector" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = 4
 script = ExtResource("3_ge5t2")
 
 [node name="SelectorBox" type="Sprite2D" parent="Selector"]
-position = Vector2(320, 305)
+position = Vector2(320, 310)
 texture = ExtResource("4_x5v04")
 
 [node name="TopLeftLabel" type="Label" parent="Selector"]
-offset_left = 213.0
-offset_top = 271.0
-offset_right = 253.0
-offset_bottom = 294.0
+offset_left = 215.0
+offset_top = 280.0
+offset_right = 255.0
+offset_bottom = 303.0
 
 [node name="TopRightLabel" type="Label" parent="Selector"]
-offset_left = 362.0
-offset_top = 272.0
-offset_right = 402.0
-offset_bottom = 295.0
+offset_left = 350.0
+offset_top = 280.0
+offset_right = 390.0
+offset_bottom = 303.0
 
 [node name="BottomLeftLabel" type="Label" parent="Selector"]
-offset_left = 218.0
-offset_top = 323.0
-offset_right = 258.0
-offset_bottom = 346.0
+offset_left = 215.0
+offset_top = 325.0
+offset_right = 255.0
+offset_bottom = 348.0
 
 [node name="BottomRightLabel" type="Label" parent="Selector"]
-offset_left = 353.0
-offset_top = 323.0
-offset_right = 393.0
-offset_bottom = 346.0
+offset_left = 350.0
+offset_top = 325.0
+offset_right = 390.0
+offset_bottom = 348.0
 
 [node name="Pointer" type="Sprite2D" parent="Selector"]
 unique_name_in_owner = true
@@ -58,18 +90,22 @@ texture = ExtResource("2_hfgr4")
 [node name="Markers" type="Node" parent="Selector"]
 
 [node name="TopLeft" type="Marker2D" parent="Selector/Markers"]
-position = Vector2(192, 282)
+position = Vector2(195, 290)
 
 [node name="TopRight" type="Marker2D" parent="Selector/Markers"]
-position = Vector2(335, 283)
+position = Vector2(335, 290)
 
 [node name="BottomLeft" type="Marker2D" parent="Selector/Markers"]
-position = Vector2(193, 335)
+position = Vector2(195, 335)
 
 [node name="BottomRight" type="Marker2D" parent="Selector/Markers"]
-position = Vector2(333, 335)
+position = Vector2(335, 335)
 
 [node name="Boss" type="Node" parent="."]
 unique_name_in_owner = true
 
 [node name="Boss" parent="Boss" instance=ExtResource("5_hyr7r")]
+
+[node name="Abilities" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_yr2s6")

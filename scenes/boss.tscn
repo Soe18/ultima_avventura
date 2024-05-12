@@ -10,10 +10,12 @@ unique_name_in_owner = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
-offset_left = 246.0
-offset_top = 21.0
-offset_right = 509.0
-offset_bottom = 48.0
+offset_left = 190.0
+offset_top = 115.0
+offset_right = 450.0
+offset_bottom = 127.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 show_percentage = false
 
 [connection signal="value_changed" from="HealthBar" to="." method="_on_health_bar_value_changed"]

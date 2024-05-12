@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://6fcdicjj733o"]
+
+[ext_resource type="Texture2D" uid="uid://dgrorwgtcpk47" path="res://assets/animations/Fuoca/Fuoca.png" id="1_1etmf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ug2k"]
+atlas = ExtResource("1_1etmf")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msbgd"]
+atlas = ExtResource("1_1etmf")
+region = Rect2(0, 180, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfq6c"]
+atlas = ExtResource("1_1etmf")
+region = Rect2(0, 360, 320, 180)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ug2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msbgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfq6c")
+}],
+"loop": true,
+"name": &"anim",
+"speed": 5.0
+}]

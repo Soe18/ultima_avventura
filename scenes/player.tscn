@@ -1,37 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://cngojrqclp1k4"]
+[gd_scene load_steps=4 format=3 uid="uid://cngojrqclp1k4"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_cxcib"]
 [ext_resource type="Texture2D" uid="uid://cd2dmqflg3h4m" path="res://assets/ui/chara_card.png" id="2_33mlf"]
 [ext_resource type="Texture2D" uid="uid://cy3ggjrjjw3gw" path="res://assets/ui/chara_selected.png" id="3_huh8s"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_8s76w"]
-
 [node name="Player" type="Node2D"]
 script = ExtResource("1_cxcib")
 
-[node name="PlayerCard" type="Node2D" parent="."]
-unique_name_in_owner = true
+[node name="FrontCard" type="Node2D" parent="."]
 
-[node name="FrontCard" type="Node2D" parent="PlayerCard"]
-
-[node name="Container" type="Sprite2D" parent="PlayerCard/FrontCard"]
+[node name="Container" type="Sprite2D" parent="FrontCard"]
 texture = ExtResource("2_33mlf")
 
-[node name="ActiveContainer" type="Sprite2D" parent="PlayerCard/FrontCard"]
+[node name="ActiveContainer" type="Sprite2D" parent="FrontCard"]
 unique_name_in_owner = true
 visible = false
 texture = ExtResource("3_huh8s")
 
-[node name="EmotionBanner" type="Sprite2D" parent="PlayerCard/FrontCard"]
+[node name="EmotionBanner" type="Sprite2D" parent="FrontCard"]
 
-[node name="CharaImg" type="Sprite2D" parent="PlayerCard/FrontCard"]
+[node name="CharaImg" type="Sprite2D" parent="FrontCard"]
+unique_name_in_owner = true
 position = Vector2(-35, -48)
-scale = Vector2(70, 70)
-texture = SubResource("ImageTexture_8s76w")
+centered = false
 
-[node name="CharaBg" type="Sprite2D" parent="PlayerCard/FrontCard"]
+[node name="CharaBg" type="Sprite2D" parent="FrontCard"]
+position = Vector2(-36, -49)
+centered = false
 
-[node name="HealthBar" type="ProgressBar" parent="PlayerCard/FrontCard"]
+[node name="HealthBar" type="ProgressBar" parent="FrontCard"]
 unique_name_in_owner = true
 offset_left = -38.0
 offset_top = 25.0
@@ -39,7 +36,7 @@ offset_right = 39.0
 offset_bottom = 40.0
 show_percentage = false
 
-[node name="ManaBar" type="ProgressBar" parent="PlayerCard/FrontCard"]
+[node name="ManaBar" type="ProgressBar" parent="FrontCard"]
 unique_name_in_owner = true
 offset_left = -38.0
 offset_top = 45.0
@@ -47,4 +44,4 @@ offset_right = 39.0
 offset_bottom = 60.0
 show_percentage = false
 
-[node name="BackCard" type="Node2D" parent="PlayerCard"]
+[node name="BackCard" type="Node2D" parent="."]
