@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4hu17kmdmxem"]
+[gd_scene load_steps=3 format=3 uid="uid://c4hu17kmdmxem"]
 
+[ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="1_2mrwr"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_qbeku"]
 
 [node name="MainMenu" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_2mrwr")
 script = ExtResource("1_qbeku")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

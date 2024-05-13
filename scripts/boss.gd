@@ -12,7 +12,7 @@ var curr_def
 var curr_spe
 var curr_eva
 
-const curr_sel = "-"
+var curr_sel = "-"
 
 func load_data():
 	curr_hp = boss_info.base_hp
@@ -32,7 +32,7 @@ func load_data():
 	healthbar.value = boss_info.base_hp
 
 func _process(delta):
-	pass
+	%HealthLabel.text = str(curr_hp)+"/"+str(boss_info.base_hp)
 
 # diff identifica la differenza
 # Se è un valore negativo, recupera vita

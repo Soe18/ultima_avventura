@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwlrh0ccdn4m1"]
+[gd_scene load_steps=4 format=3 uid="uid://cwlrh0ccdn4m1"]
 
 [ext_resource type="Script" path="res://scripts/boss.gd" id="1_7ve6u"]
+[ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="2_720eo"]
+[ext_resource type="Theme" uid="uid://dv64lprbkud03" path="res://assets/ui/healthbar.tres" id="2_xkjm3"]
 
 [node name="Boss" type="Node2D"]
 script = ExtResource("1_7ve6u")
@@ -11,11 +13,22 @@ unique_name_in_owner = true
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 offset_left = 190.0
-offset_top = 115.0
+offset_top = 116.0
 offset_right = 450.0
-offset_bottom = 127.0
+offset_bottom = 128.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = ExtResource("2_xkjm3")
 show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 193.0
+offset_top = 115.0
+offset_right = 453.0
+offset_bottom = 128.0
+theme = ExtResource("2_720eo")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
 
 [connection signal="value_changed" from="HealthBar" to="." method="_on_health_bar_value_changed"]

@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_lsmsk")
-itemlist = Array[String](["Panino", "Panino", "Panino", "Acqua", "Acqua", "Scacciaspiriti"])
+itemlist = ["Panino", "Panino", "Panino", "Acqua", "Acqua", "Talismano"]

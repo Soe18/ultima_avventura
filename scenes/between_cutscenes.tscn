@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdjv1kd0wvduw"]
+[gd_scene load_steps=5 format=3 uid="uid://bdjv1kd0wvduw"]
 
 [ext_resource type="Script" path="res://scripts/between_cutscenes.gd" id="1_2pmfa"]
+[ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="1_fe47r"]
+
+[sub_resource type="Gradient" id="Gradient_vaoh7"]
+colors = PackedColorArray(0, 0, 0.333333, 1, 0, 0, 0.333333, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qmyfg"]
+gradient = SubResource("Gradient_vaoh7")
 
 [node name="BetweenCutscenes" type="Control"]
 layout_mode = 3
@@ -9,7 +16,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_fe47r")
 script = ExtResource("1_2pmfa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(328, 185.5)
+scale = Vector2(10.4688, 5.95312)
+texture = SubResource("GradientTexture2D_qmyfg")
 
 [node name="Score" type="Label" parent="."]
 unique_name_in_owner = true
@@ -26,3 +39,4 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Bravooo!!!"
+horizontal_alignment = 1

@@ -7,9 +7,10 @@ var last_message = false
 func _ready():
 	var score = scene_manager.get_score()
 	if score > 0:
-		score_label.text = str(score)
+		score_label.text = "Complimenti, il tuo punteggio
+		ammonta a "+str(score)+"!"
 	else:
-		score_label.text = "Too bad! Game over"
+		score_label.text = "Il gruppo ha finito la sua ultima avventura."
 		last_message = true
 
 func _process(_delta):

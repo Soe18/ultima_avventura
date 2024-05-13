@@ -1,24 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4rmc4llx8n4e"]
+[gd_scene load_steps=7 format=3 uid="uid://b4rmc4llx8n4e"]
 
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_olmep"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_gp0t8"]
 [ext_resource type="Resource" uid="uid://cxd0gvobver6i" path="res://data/itemlist/default.tres" id="2_lunl4"]
+[ext_resource type="Texture2D" uid="uid://ccli0umkxme1b" path="res://assets/ui/input_displayer.png" id="3_t2sqh"]
 [ext_resource type="Script" path="res://scripts/saver_loader.gd" id="3_vhwh1"]
+[ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="4_ql2q8"]
 
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_olmep")
 base_itemlist = ExtResource("2_lunl4")
 reset_memories_rate = 5
 
+[node name="InputDisplayer" type="Sprite2D" parent="."]
+z_index = 99
+texture = ExtResource("3_t2sqh")
+centered = false
+
 [node name="Menu" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 99
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_ql2q8")
 script = ExtResource("2_gp0t8")
 
 [node name="VBox" type="VBoxContainer" parent="Menu"]

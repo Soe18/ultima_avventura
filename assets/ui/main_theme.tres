@@ -1,0 +1,61 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ccaobqrsog5j0"]
+
+[ext_resource type="FontFile" uid="uid://dfc4ft2k7b28s" path="res://assets/font/m5x7.ttf" id="1_k1gw5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbjhb"]
+bg_color = Color(0.482353, 0.415686, 0.647059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0705882, 0.0901961, 0.239216, 1)
+expand_margin_left = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kegut"]
+bg_color = Color(0.482353, 0.415686, 0.647059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0705882, 0.0901961, 0.239216, 1)
+expand_margin_left = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pca88"]
+bg_color = Color(0.635294, 0.576471, 0.768627, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0705882, 0.0901961, 0.239216, 1)
+expand_margin_left = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vstr0"]
+bg_color = Color(0.521569, 0.298039, 0.74902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0705882, 0.0901961, 0.239216, 1)
+expand_margin_left = 4.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 4.0
+
+[resource]
+default_font = ExtResource("1_k1gw5")
+default_font_size = 32
+Button/colors/font_color = Color(0.0705882, 0.0901961, 0.239216, 1)
+Button/colors/font_focus_color = Color(0.756863, 0.85098, 0.94902, 1)
+Button/colors/font_hover_color = Color(0.756863, 0.85098, 0.94902, 1)
+Button/colors/font_hover_pressed_color = Color(0.756863, 0.85098, 0.94902, 1)
+Button/colors/font_outline_color = Color(0.756863, 0.85098, 0.94902, 1)
+Button/colors/font_pressed_color = Color(0.756863, 0.85098, 0.94902, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_hbjhb")
+Button/styles/hover = SubResource("StyleBoxFlat_kegut")
+Button/styles/normal = SubResource("StyleBoxFlat_pca88")
+Button/styles/pressed = SubResource("StyleBoxFlat_vstr0")
+HBoxContainer/constants/separation = 8
+VBoxContainer/constants/separation = 8

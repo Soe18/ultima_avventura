@@ -1,0 +1,74 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://d1wwkqhd7uv1w"]
+
+[ext_resource type="Texture2D" uid="uid://bf0nxkn08oo5b" path="res://assets/animations/Hachi/Hachi.png" id="1_17a3d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdwrr"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hosas"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(320, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0fck"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(0, 180, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn8la"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(320, 180, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsju2"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(0, 360, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxpd4"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(320, 360, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whu2v"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(0, 540, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqvdy"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(320, 540, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ev6s8"]
+atlas = ExtResource("1_17a3d")
+region = Rect2(0, 720, 320, 180)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdwrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hosas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0fck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn8la")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsju2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxpd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whu2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqvdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev6s8")
+}],
+"loop": true,
+"name": &"anim",
+"speed": 5.0
+}]

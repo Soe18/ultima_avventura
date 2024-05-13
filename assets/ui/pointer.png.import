@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx3d3rglgbhrp"
-path="res://.godot/imported/Fuoca.png-34945438bc0a5ea0c8d58f5e8942eb15.ctex"
+uid="uid://c3oby75jjapv7"
+path="res://.godot/imported/pointer.png-133392f260ecc87b51a28d66b4343076.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/Fuoca/Fuoca.png"
-dest_files=["res://.godot/imported/Fuoca.png-34945438bc0a5ea0c8d58f5e8942eb15.ctex"]
+source_file="res://assets/ui/pointer.png"
+dest_files=["res://.godot/imported/pointer.png-133392f260ecc87b51a28d66b4343076.ctex"]
 
 [params]
 

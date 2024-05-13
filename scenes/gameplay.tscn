@@ -1,22 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi36inx7suyd0"]
+[gd_scene load_steps=12 format=3 uid="uid://bi36inx7suyd0"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_g8qol"]
 [ext_resource type="Resource" uid="uid://dv08yj5wev20t" path="res://data/default_describer.tres" id="2_67u4m"]
-[ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="2_hfgr4"]
 [ext_resource type="Script" path="res://scripts/selector.gd" id="3_ge5t2"]
 [ext_resource type="Script" path="res://scripts/descriptor.gd" id="4_ilxao"]
 [ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="4_x5v04"]
 [ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/boss.tscn" id="5_hyr7r"]
+[ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="6_8b705"]
+[ext_resource type="Texture2D" uid="uid://c3oby75jjapv7" path="res://assets/ui/pointer.png" id="7_avrdi"]
 [ext_resource type="Script" path="res://scripts/abilities.gd" id="8_yr2s6"]
+
+[sub_resource type="Gradient" id="Gradient_co2tq"]
+colors = PackedColorArray(0, 0, 0.333333, 1, 0, 0, 0.333333, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u27xt"]
+gradient = SubResource("Gradient_co2tq")
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_g8qol")
 describer = ExtResource("2_67u4m")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(320, 180)
-scale = Vector2(5, 2.812)
-texture = ExtResource("2_hfgr4")
+position = Vector2(323, 182.5)
+scale = Vector2(10.0938, 5.73438)
+texture = SubResource("GradientTexture2D_u27xt")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
@@ -34,6 +41,7 @@ offset_left = -139.0
 offset_top = -39.0
 offset_right = 114.0
 offset_bottom = -9.0
+theme = ExtResource("6_8b705")
 text = "asdasd"
 
 [node name="Description" type="Label" parent="Descriptor"]
@@ -46,6 +54,8 @@ offset_top = -55.0
 offset_right = 141.0
 offset_bottom = -10.0
 grow_vertical = 2
+theme = ExtResource("6_8b705")
+theme_override_font_sizes/font_size = 16
 text = "asdasd"
 autowrap_mode = 3
 
@@ -59,33 +69,36 @@ position = Vector2(320, 310)
 texture = ExtResource("4_x5v04")
 
 [node name="TopLeftLabel" type="Label" parent="Selector"]
-offset_left = 215.0
-offset_top = 280.0
-offset_right = 255.0
-offset_bottom = 303.0
+offset_left = 210.0
+offset_top = 275.0
+offset_right = 250.0
+offset_bottom = 301.0
+theme = ExtResource("6_8b705")
 
 [node name="TopRightLabel" type="Label" parent="Selector"]
 offset_left = 350.0
-offset_top = 280.0
+offset_top = 275.0
 offset_right = 390.0
-offset_bottom = 303.0
+offset_bottom = 301.0
+theme = ExtResource("6_8b705")
 
 [node name="BottomLeftLabel" type="Label" parent="Selector"]
-offset_left = 215.0
-offset_top = 325.0
-offset_right = 255.0
-offset_bottom = 348.0
+offset_left = 210.0
+offset_top = 320.0
+offset_right = 250.0
+offset_bottom = 346.0
+theme = ExtResource("6_8b705")
 
 [node name="BottomRightLabel" type="Label" parent="Selector"]
 offset_left = 350.0
-offset_top = 325.0
+offset_top = 320.0
 offset_right = 390.0
-offset_bottom = 348.0
+offset_bottom = 346.0
+theme = ExtResource("6_8b705")
 
 [node name="Pointer" type="Sprite2D" parent="Selector"]
 unique_name_in_owner = true
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_hfgr4")
+texture = ExtResource("7_avrdi")
 
 [node name="Markers" type="Node" parent="Selector"]
 

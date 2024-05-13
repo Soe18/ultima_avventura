@@ -1,30 +1,86 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://6fcdicjj733o"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://drjw33b0b3nk7"]
 
-[ext_resource type="Texture2D" uid="uid://dgrorwgtcpk47" path="res://assets/animations/Fuoca/Fuoca.png" id="1_1etmf"]
+[ext_resource type="Texture2D" uid="uid://dx3d3rglgbhrp" path="res://assets/animations/Fuoca/Fuoca.png" id="1_gifv7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ug2k"]
-atlas = ExtResource("1_1etmf")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebt0j"]
+atlas = ExtResource("1_gifv7")
 region = Rect2(0, 0, 320, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_msbgd"]
-atlas = ExtResource("1_1etmf")
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdaq1"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(320, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuswq"]
+atlas = ExtResource("1_gifv7")
 region = Rect2(0, 180, 320, 180)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yfq6c"]
-atlas = ExtResource("1_1etmf")
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpqeg"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(320, 180, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci4wi"]
+atlas = ExtResource("1_gifv7")
 region = Rect2(0, 360, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sud4g"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(320, 360, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ct4qj"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(0, 540, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cs1v"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(320, 540, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sdeb"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(0, 720, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q61t5"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(320, 720, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5w0ox"]
+atlas = ExtResource("1_gifv7")
+region = Rect2(0, 900, 320, 180)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5ug2k")
+"texture": SubResource("AtlasTexture_ebt0j")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_msbgd")
+"texture": SubResource("AtlasTexture_bdaq1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yfq6c")
+"texture": SubResource("AtlasTexture_iuswq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpqeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ci4wi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sud4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ct4qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cs1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sdeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q61t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5w0ox")
 }],
 "loop": true,
 "name": &"anim",

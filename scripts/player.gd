@@ -14,6 +14,8 @@ var curr_sel = ""
 var menu_sel = ""
 
 @onready var active_container = %ActiveContainer
+@onready var chara_bg = %CharaBg
+@onready var displayed_name = %DisplayedName
 
 @onready var healthbar = %HealthBar
 @onready var manabar = %ManaBar
@@ -43,6 +45,8 @@ func _ready():
 	if curr_mana == -1: # First game
 		curr_mana = player_info.base_mana
 	
+	chara_bg.play()
+	
 	# Let's show its image!
 	chara_img.texture = player_info.image
 
@@ -51,6 +55,12 @@ func _ready():
 	
 	manabar.max_value = player_info.base_mana
 	manabar.value = player_info.base_hp
+	
+	displayed_name.text = player_info.name
+
+func _process(_delta):
+	%HealthLabel.text = str(curr_hp)+"/"+str(player_info.base_hp)
+	%ManaLabel.text = str(curr_mana)+"/"+str(player_info.base_mana)
 
 func active_borders(visibility):
 	active_container.visible = visibility
@@ -69,6 +79,7 @@ func set_health(health):
 	curr_hp = health
 	if (curr_hp<0):
 		curr_hp = 0
+		chara_bg.stop()
 	healthbar.value = curr_hp
 
 # Same as set_health()

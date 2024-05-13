@@ -10,6 +10,7 @@ var player
 # Main func which applies the method given the ability
 func do_ability(user):
 	player = user
+	user.curr_sel = "Fuoca"
 	play_anim(user.curr_sel)
 	# Which effect will be selected?
 	match user.curr_sel:
@@ -34,7 +35,6 @@ func play_anim(anim_name):
 	add_child(animation)
 	animation.z_index = 10
 	animation.sprite_frames.set_animation_loop("anim", false)
-	animation.sprite_frames.set_animation_speed("anim", 1)
 	g.animation_playing = true
 	animation.play()
 	animation.centered = false
