@@ -2,28 +2,29 @@
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_g8qol"]
 [ext_resource type="Resource" uid="uid://dv08yj5wev20t" path="res://data/default_describer.tres" id="2_67u4m"]
+[ext_resource type="Texture2D" uid="uid://dod82jqhiari8" path="res://assets/bgs/gameplay_bg.png" id="3_7il0q"]
 [ext_resource type="Script" path="res://scripts/selector.gd" id="3_ge5t2"]
 [ext_resource type="Script" path="res://scripts/descriptor.gd" id="4_ilxao"]
+[ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="4_j51j2"]
 [ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="4_x5v04"]
 [ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/boss.tscn" id="5_hyr7r"]
 [ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="6_8b705"]
 [ext_resource type="Texture2D" uid="uid://c3oby75jjapv7" path="res://assets/ui/pointer.png" id="7_avrdi"]
 [ext_resource type="Script" path="res://scripts/abilities.gd" id="8_yr2s6"]
 
-[sub_resource type="Gradient" id="Gradient_co2tq"]
-colors = PackedColorArray(0, 0, 0.333333, 1, 0, 0, 0.333333, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_u27xt"]
-gradient = SubResource("Gradient_co2tq")
-
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_g8qol")
 describer = ExtResource("2_67u4m")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(323, 182.5)
-scale = Vector2(10.0938, 5.73438)
-texture = SubResource("GradientTexture2D_u27xt")
+scale = Vector2(2, 2)
+texture = ExtResource("3_7il0q")
+centered = false
+
+[node name="Bugs" type="Sprite2D" parent="."]
+position = Vector2(318, 189)
+scale = Vector2(0.421875, 0.421875)
+texture = ExtResource("4_j51j2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
@@ -122,3 +123,9 @@ unique_name_in_owner = true
 [node name="Abilities" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("8_yr2s6")
+
+[node name="AnimationCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.05
+
+[connection signal="timeout" from="AnimationCooldown" to="Abilities" method="_on_animation_cooldown_timeout"]

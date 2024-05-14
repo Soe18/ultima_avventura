@@ -5,7 +5,15 @@ var default_animation_pos = "res://assets/animations/"
 var animation
 @onready var g = get_parent() # Stands for gameplay
 @onready var descriptor = %Descriptor
+@onready var anim_cooldown = %AnimationCooldown
 var player
+
+func always_at_end_attack():
+	anim_cooldown.start()
+
+func _on_animation_cooldown_timeout():
+	g.timeout_text = true
+	anim_cooldown.stop()
 
 # Main func which applies the method given the ability
 func do_ability(user):
@@ -46,6 +54,9 @@ func do_fuoca():
 	g.animation_playing = false
 	descriptor.display_effects("Whoa! Arata ha fatto un casino di danni!")
 	g.boss.receive_damage(player.curr_atk)
+	
+	# To always put at your end attack
+	always_at_end_attack()
 
 """
 # fighting methods

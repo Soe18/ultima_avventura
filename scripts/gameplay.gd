@@ -14,6 +14,8 @@ var itemlist : Itemlist
 @onready var selector = %Selector
 @onready var descriptor = %Descriptor
 @onready var abilities = %Abilities
+# USED BY TIMER TO MAKE PLAYER ABLE TO READ EFFECTS
+var timeout_text = true
 
 @onready var players_node
 @onready var boss_node = %Boss
@@ -96,6 +98,13 @@ func _process(delta):
 				manage_next_move()
 		if Input.is_action_just_pressed("deny"):
 			previous_selection()
+		# I love eggs
+		if Input.is_action_pressed("easter_egg"):
+			descriptor.visible = false
+			boss.visible = false
+		if Input.is_action_just_released("easter_egg"):
+			descriptor.visible = true
+			boss.visible = true
 	else:
 		if processed_default_vars_action:
 			descriptor.reset_text()
@@ -112,14 +121,20 @@ func _process(delta):
 			all_attackers.sort_custom(func(a,b) : return a.curr_spe > b.curr_spe)
 			# Everyone now has right orders... or not?
 			# TODO: FUNC to check if move changes action time
-		if Input.is_action_just_pressed("confirm") and player_index >= all_attackers.size():
+		
+		# New turn start
+		if Input.is_action_just_pressed("confirm") and (player_index >= all_attackers.size()):
 			# Anyone who died shall return the items they took
 			itemlist.return_items()
 			# Set var to enable new turn
 			choosing = true
 			player_index = 0
+			timeout_text = true
 		
-		if Input.is_action_just_pressed("confirm") && !choosing and not animation_playing:
+		# A player or boss attack
+		if Input.is_action_just_pressed("confirm") && !choosing and not animation_playing and timeout_text:
+			# First started, let's already finish it
+			timeout_text = false
 			descriptor.reset_text()
 			if all_attackers[player_index].curr_hp > 0:
 				if all_attackers[player_index].curr_sel != "-":
