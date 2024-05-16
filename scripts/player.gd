@@ -12,6 +12,7 @@ var curr_mana = -1
 
 var curr_sel = ""
 var menu_sel = ""
+var is_boss = false
 
 @onready var active_container = %ActiveContainer
 @onready var chara_bg = %CharaBg
@@ -68,11 +69,43 @@ func active_borders(visibility):
 # diff identifica la differenza
 # Se è un valore negativo, recupera vita
 func receive_damage(diff):
-	print(player_info.name)
 	curr_hp = curr_hp-diff
-	if (curr_hp<0):
+	if (curr_hp < 0):
 		curr_hp = 0
+	if (curr_hp > player_info.base_hp):
+		curr_hp = player_info.base_hp
 	healthbar.value = curr_hp
+
+# Se è un valore negativo, recupera mana
+func use_mana(diff):
+	curr_mana = curr_mana-diff
+	if (curr_mana < 0):
+		curr_mana = 0
+	if (curr_mana > player_info.base_mana):
+		curr_mana = player_info.base_mana
+	manabar.value = curr_mana
+
+# Positive modifier, buffed stats
+# Negative modifier, nerfed stats
+func change_atk(modifier):
+	curr_atk = curr_atk + modifier
+	if curr_atk < 0:
+		curr_atk = 0
+
+func change_def(modifier):
+	curr_def = curr_def + modifier
+	if curr_def < 0:
+		curr_def = 0
+
+func change_spe(modifier):
+	curr_spe = curr_spe + modifier
+	if curr_spe < 0:
+		curr_spe = 0
+
+func change_eva(modifier):
+	curr_eva = curr_eva + modifier
+	if curr_eva < 0:
+		curr_eva = 0
 
 # Not a damage function
 func set_health(health):

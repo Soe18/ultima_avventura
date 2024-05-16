@@ -22,7 +22,7 @@ var ongame = false
 
 const main_menu := "res://scenes/main_menu.tscn"
 const players_route := "res://scenes/players.tscn"
-const bosses_route := "res://data/bosses/"
+const bosses_route := "res://scenes/bosses.tscn"
 const gameplay_route := "res://scenes/gameplay.tscn"
 const cutscenes_route := "res://scenes/between_cutscenes.tscn"
 
@@ -46,7 +46,7 @@ func load_next_game():
 	players = preload(players_route).instantiate()
 	current_scene = preload(gameplay_route).instantiate()
 	current_scene.players_node = players
-	var boss_tres = load(get_boss_tres_path())
+	var boss_tres = get_boss_tres()
 	current_scene.boss_tres = boss_tres
 	current_scene.itemlist = itemlist
 	add_child(current_scene)
@@ -118,14 +118,16 @@ func update_player_status(players_node):
 		index = index + 1
 	print_debug(self.players.get_children())
 
-func get_boss_tres_path() -> String:
+func get_boss_tres():
 	const multiplier = 5
 	if index_boss == -1:
 		index_boss = RandomNumberGenerator.new().randi_range(0, len(bosses)*multiplier)
 		index_boss = index_boss%len(bosses)
-	return bosses_route+bosses[index_boss]
+	return bosses[index_boss]
 
 func redirect_to_main_menu():
+	# No more in pause
+	paused = false
 	current_scene.queue_free()
 	# Hide and disable menu
 	menu.visible = false
@@ -163,13 +165,9 @@ func full_main_menu_load(first_load):
 	add_child(current_scene)
 	current_scene.menu_focus()
 	# Initialize bosses
-	var dir = DirAccess.open(bosses_route)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			bosses.append(file_name)
-			file_name = dir.get_next()
+	var bosses_node = preload(bosses_route).instantiate()
+	for boss_node in bosses_node.get_children():
+		bosses.append(boss_node.boss_info)
 
 func save():
 	saver_loader.save_game(players_status, score, index_boss, itemlist)

@@ -1,14 +1,15 @@
 [gd_resource type="Resource" script_class="Boss_Info" load_steps=3 format=3 uid="uid://dufd28d1pck0d"]
 
+[ext_resource type="Texture2D" uid="uid://fjwrj4hxqal6" path="res://assets/boss/ratto/ratto.png" id="1_8poyq"]
 [ext_resource type="Script" path="res://data/boss_info.gd" id="1_txs1g"]
-[ext_resource type="Texture2D" uid="uid://bg0csf1erf4rn" path="res://assets/boss/sprite/ratto.png" id="1_vemad"]
 
 [resource]
 script = ExtResource("1_txs1g")
 name = "Ratto"
-base_hp = 240
-base_atk = 70
-base_def = 100
-base_spe = 100
-base_eva = 5
-param_sprite = ExtResource("1_vemad")
+base_hp = 1000
+base_atk = 211
+base_def = 70
+base_spe = 101
+base_eva = 10
+param_sprite = ExtResource("1_8poyq")
+abilities = Array[String](["Tonfo", "Taglio"])

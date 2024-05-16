@@ -9,6 +9,7 @@ script = ExtResource("1_7ve6u")
 
 [node name="DefaultSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+scale = Vector2(2, 2)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true

@@ -6,6 +6,19 @@
 script = ExtResource("1_6cj4g")
 abilities_list = {
 "-": "Null",
+"Acqua": "Recupera tutto il mana e aumenta di molto l`attacco.",
+"Ares": "Il locandiere che gli strappava sempre una risata. Cura totalmente la vita di un alleato e aumenta di molto la sua difesa.",
+"Distrai": "Lancia una freccia che distrae il nemico. Abbassa la difesa del boss. Consuma 66 di mana.",
+"Egida": "Cura metà della vita ad un alleato (non sé stesso). Consuma 200 di mana.",
+"Elira": "Abbassa la sua difesa, ma concentra l’attacco del boss su di sé. Consuma 23 di mana.",
 "Fulmato": "Pugno intriso di fulmini. Esaurisce tutto il mana, più mana aveva, più danno fa.",
-"Tuonaga": "Scarica elettrica che infligge grossi danni al nemico. Aumenta il suo attacco. Alto consumo di mana."
+"Fuoca": "Evoca un drago che lancia fiamme. Esegue bei danni e ripristina 50 di mana a tutti (eccetto lui). Consuma 100 di mana.",
+"Hachi": "La sua maestra di vita. Aumenta paurosamente il suo attacco.",
+"Hideki": "L`ha cresciuto nei primi anni della sua vita. Recupera totalmente i punti vita e mana, aumenta l’attacco.",
+"Liv": "Il figlio che ha lasciato nell’altro mondo. Esegue un attacco potente.",
+"Panino": "Recupera tutta la vita e aumenta la difesa.",
+"Syros": "Suo marito, con cui ne ha passate tante. La sua difesa ritorna ai valori originali e tutti gli alleati recuperano metà della vita.",
+"Talismano": "Neutralizza tutte i cambi di statistiche. ",
+"Tuonaga": "Scarica elettrica che infligge grossi danni al nemico. Aumenta il suo attacco. Consuma 123 di mana.",
+"Yoku": "L`amico dragonide con cui ne ha passate tante. Aumenta di molto la velocità di tutti gli alleati."
 }

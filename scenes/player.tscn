@@ -153,7 +153,7 @@ offset_right = 40.0
 offset_bottom = 42.0
 theme = ExtResource("5_6dglb")
 theme_override_font_sizes/font_size = 16
-text = "aaa
+text = "0/0
 "
 horizontal_alignment = 1
 
@@ -174,7 +174,7 @@ offset_right = 40.0
 offset_bottom = 62.0
 theme = ExtResource("5_6dglb")
 theme_override_font_sizes/font_size = 16
-text = "aaa"
+text = "0/0"
 horizontal_alignment = 1
 
 [node name="BackCard" type="Node2D" parent="."]

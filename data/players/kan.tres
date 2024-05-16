@@ -7,14 +7,14 @@
 script = ExtResource("1_fwh64")
 name = "Kan"
 image = ExtResource("1_avv02")
-base_hp = 100
-base_mana = 100
-base_atk = 100
-base_def = 100
+base_hp = 329
+base_mana = 392
+base_atk = 208
+base_def = 101
 base_spe = 87
-base_eva = 5
+base_eva = 9
 card_position = 0
 subselector = {
 "Combatti": ["Tuonaga", "Fulmato"],
-"Memoria": ["Hachi", "Ares"]
+"Memoria": ["Hachi", "-"]
 }

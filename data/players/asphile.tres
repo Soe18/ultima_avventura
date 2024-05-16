@@ -7,14 +7,14 @@
 script = ExtResource("1_ae5pn")
 name = "Asphile"
 image = ExtResource("1_nnsrl")
-base_hp = 100
-base_mana = 100
-base_atk = 100
-base_def = 100
+base_hp = 540
+base_mana = 109
+base_atk = 127
+base_def = 142
 base_spe = 75
-base_eva = 5
+base_eva = 6
 card_position = 1
 subselector = {
-"Combatti": ["Elira", "Distrai"],
-"Memoria": ["Liv", "Syros"]
+"Combatti": ["Distrai", "-"],
+"Memoria": ["Liv", "-"]
 }

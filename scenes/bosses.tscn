@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0mdx2i440gej"]
+
+[ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/boss.tscn" id="1_mdo6j"]
+[ext_resource type="Resource" uid="uid://dufd28d1pck0d" path="res://data/bosses/ratto.tres" id="2_i1ex1"]
+[ext_resource type="Resource" uid="uid://dbunexfatm37y" path="res://data/bosses/ragno.tres" id="3_0l47f"]
+
+[node name="Bosses" type="Node"]
+
+[node name="Ratto" parent="." instance=ExtResource("1_mdo6j")]
+boss_info = ExtResource("2_i1ex1")
+
+[node name="Ragno" parent="." instance=ExtResource("1_mdo6j")]
+boss_info = ExtResource("3_0l47f")

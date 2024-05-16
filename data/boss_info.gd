@@ -17,3 +17,6 @@ var base_spe : int = 100
 var base_eva : int = 5
 @export
 var param_sprite:Texture2D
+
+@export_category("Boss abilities")
+@export var abilities : Array[String]

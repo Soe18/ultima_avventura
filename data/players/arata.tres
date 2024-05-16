@@ -7,14 +7,14 @@
 script = ExtResource("1_rf7yw")
 name = "Arata"
 image = ExtResource("1_si51h")
-base_hp = 100
-base_mana = 100
-base_atk = 100
-base_def = 100
-base_spe = 111
-base_eva = 5
+base_hp = 300
+base_mana = 500
+base_atk = 190
+base_def = 140
+base_spe = 150
+base_eva = 15
 card_position = 2
 subselector = {
-"Combatti": ["Fuoca", "Egida"],
+"Combatti": ["Fuoca", "-"],
 "Memoria": ["Hideki", "Yoku"]
 }

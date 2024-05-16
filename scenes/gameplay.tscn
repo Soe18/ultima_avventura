@@ -43,7 +43,7 @@ offset_top = -39.0
 offset_right = 114.0
 offset_bottom = -9.0
 theme = ExtResource("6_8b705")
-text = "asdasd"
+text = "Title"
 
 [node name="Description" type="Label" parent="Descriptor"]
 unique_name_in_owner = true
@@ -57,7 +57,7 @@ offset_bottom = -10.0
 grow_vertical = 2
 theme = ExtResource("6_8b705")
 theme_override_font_sizes/font_size = 16
-text = "asdasd"
+text = "Description"
 autowrap_mode = 3
 
 [node name="Selector" type="Node2D" parent="."]
@@ -128,4 +128,4 @@ script = ExtResource("8_yr2s6")
 unique_name_in_owner = true
 wait_time = 0.05
 
-[connection signal="timeout" from="AnimationCooldown" to="Abilities" method="_on_animation_cooldown_timeout"]
+[connection signal="timeout" from="AnimationCooldown" to="." method="_on_animation_cooldown_timeout"]

@@ -14,6 +14,7 @@ var itemlist : Itemlist
 @onready var selector = %Selector
 @onready var descriptor = %Descriptor
 @onready var abilities = %Abilities
+@onready var anim_cooldown = %AnimationCooldown
 # USED BY TIMER TO MAKE PLAYER ABLE TO READ EFFECTS
 var timeout_text = true
 
@@ -36,9 +37,16 @@ var animation_playing = false
 var processed_default_vars_start:bool = true
 var processed_default_vars_action:bool = true
 var check_end_of_game:bool = false
+# Will play 'enter' automatically without the need of user
+# (only on certain scenario defined by the game)
+var autoplay:bool = false
 var all_attackers
 
 @onready var scene_manager = get_tree().root.get_child(0)
+
+func _on_animation_cooldown_timeout():
+	timeout_text = true
+	anim_cooldown.stop()
 
 func _ready():
 	# Put boss in scene
@@ -65,7 +73,7 @@ func _process(delta):
 					players.append(player)
 					player_input.append("")
 					category_input.append("")
-			print_debug(players)
+			#print_debug(players)
 			# TODO: Dai errore se overlappano le posizioni
 			# Si puo' fare anche da scene manager
 			current_player = players[player_index]
@@ -94,7 +102,7 @@ func _process(delta):
 			if selector.get_field():
 				category_input[player_index] = player_input[player_index]
 				player_input[player_index] = selector.get_field()
-				print_debug(category_input)
+				print_debug(player_input)
 				manage_next_move()
 		if Input.is_action_just_pressed("deny"):
 			previous_selection()
@@ -107,6 +115,7 @@ func _process(delta):
 			boss.visible = true
 	else:
 		if processed_default_vars_action:
+			autoplay = true
 			descriptor.reset_text()
 			player_index = 0
 			processed_default_vars_action = false
@@ -123,7 +132,7 @@ func _process(delta):
 			# TODO: FUNC to check if move changes action time
 		
 		# New turn start
-		if Input.is_action_just_pressed("confirm") and (player_index >= all_attackers.size()):
+		if (Input.is_action_just_pressed("confirm") or autoplay) and (player_index >= all_attackers.size()) and not animation_playing and timeout_text:
 			# Anyone who died shall return the items they took
 			itemlist.return_items()
 			# Set var to enable new turn
@@ -132,12 +141,13 @@ func _process(delta):
 			timeout_text = true
 		
 		# A player or boss attack
-		if Input.is_action_just_pressed("confirm") && !choosing and not animation_playing and timeout_text:
+		if (Input.is_action_just_pressed("confirm") or autoplay) && !choosing and not animation_playing and timeout_text:
 			# First started, let's already finish it
+			autoplay = false
 			timeout_text = false
 			descriptor.reset_text()
 			if all_attackers[player_index].curr_hp > 0:
-				if all_attackers[player_index].curr_sel != "-":
+				if not all_attackers[player_index].is_boss:
 					# Now it's a player attacking
 					if all_attackers[player_index].menu_sel == "Memoria":
 						# Attacker used a memory
@@ -150,25 +160,32 @@ func _process(delta):
 					# Now it's the boss attacking
 					abilities.do_ability(all_attackers[player_index])
 			else:
-				print_debug("he's dead...")
+				# Player is dead, cannot attack
+				autoplay = true
+				# An animation is waiting to be played
+				# but we cannot do it
+				timeout_text = true
 			player_index = player_index+1
 			check_end_of_game = true
 		
 		# Check end of game
 		if check_end_of_game:
+			# In both scenario, let's await player input to go on
 			if boss.curr_hp <= 0:
-				scene_manager.inc_score()
-				# Players in scene manager is a node, not an array
-				scene_manager.update_player_status(players_node)
-				scene_manager.load_between_cutscene()
+				if Input.is_action_just_pressed("confirm"):
+					scene_manager.inc_score()
+					# Players in scene manager is a node, not an array
+					scene_manager.update_player_status(players_node)
+					scene_manager.load_between_cutscene()
 				
 				# Not used items (because fight finished earlier) returns
 				itemlist.return_items()
 			if all_players_are_dead():
-				# change to gameover
-				scene_manager.lose()
-				scene_manager.update_player_status(players_node)
-				scene_manager.load_between_cutscene()
+				if Input.is_action_just_pressed("confirm"):
+					# change to gameover
+					scene_manager.lose()
+					scene_manager.update_player_status(players_node)
+					scene_manager.load_between_cutscene()
 
 # choosing methods
 func manage_next_move():

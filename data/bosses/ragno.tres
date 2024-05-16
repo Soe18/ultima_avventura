@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Boss_Info" load_steps=2 format=3 uid="uid://dbunexfatm37y"]
+
+[ext_resource type="Script" path="res://data/boss_info.gd" id="1_jhkte"]
+
+[resource]
+script = ExtResource("1_jhkte")
+name = "Ragno"
+base_hp = 1500
+base_atk = 69
+base_def = 140
+base_spe = 199
+base_eva = 5
+abilities = Array[String](["Morso"])
