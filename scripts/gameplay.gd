@@ -82,6 +82,7 @@ func _process(delta):
 			selector_state = SELECTOR_STATES.SELECT_FIELD
 			processed_default_vars_action = true
 			processed_default_vars_start = false
+			descriptor.reset_text()
 		
 		# Start the loop
 		selector.visible = true

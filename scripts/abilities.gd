@@ -14,7 +14,11 @@ func always_at_end_attack():
 	anim_cooldown.start()
 
 func basic_damage_formula(sender_atk, strength, receiver_def):
-	return int((sender_atk*strength)-receiver_def)+randi_range(0, strength*10)
+	var padding = randi_range(1, strength*10)
+	var damage = int((sender_atk*strength)-receiver_def)+padding
+	if damage < padding:
+		damage = padding 
+	return damage
 
 # Main func which applies the method given the ability
 func do_ability(user):

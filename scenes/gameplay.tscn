@@ -126,6 +126,5 @@ script = ExtResource("8_yr2s6")
 
 [node name="AnimationCooldown" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.05
 
 [connection signal="timeout" from="AnimationCooldown" to="." method="_on_animation_cooldown_timeout"]
