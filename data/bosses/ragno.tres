@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Boss_Info" load_steps=2 format=3 uid="uid://dbunexfatm37y"]
+[gd_resource type="Resource" script_class="Boss_Info" load_steps=3 format=3 uid="uid://dbunexfatm37y"]
 
+[ext_resource type="Texture2D" uid="uid://dchpgkhuoefsu" path="res://assets/boss/ragno/ragno.png" id="1_dsjvt"]
 [ext_resource type="Script" path="res://data/boss_info.gd" id="1_jhkte"]
 
 [resource]
@@ -10,4 +11,5 @@ base_atk = 69
 base_def = 140
 base_spe = 199
 base_eva = 5
+param_sprite = ExtResource("1_dsjvt")
 abilities = Array[String](["Morso"])

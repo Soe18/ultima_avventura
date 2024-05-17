@@ -1,7 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4hu17kmdmxem"]
+[gd_scene load_steps=8 format=3 uid="uid://c4hu17kmdmxem"]
 
 [ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="1_2mrwr"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_qbeku"]
+[ext_resource type="Texture2D" uid="uid://iohk58lsdeay" path="res://assets/bgs/intro_bg.png" id="3_rkep3"]
+[ext_resource type="Texture2D" uid="uid://c1028vmowa8pr" path="res://assets/ui/logo.png" id="4_tviet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26n34"]
+atlas = ExtResource("3_rkep3")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1iir"]
+atlas = ExtResource("3_rkep3")
+region = Rect2(0, 180, 320, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6dlwg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26n34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1iir")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +36,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_2mrwr")
 script = ExtResource("1_qbeku")
+
+[node name="BG" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_6dlwg")
+autoplay = "default"
+frame_progress = 0.048219
+centered = false
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(416, 138)
+texture = ExtResource("4_tviet")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

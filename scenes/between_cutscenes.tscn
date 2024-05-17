@@ -2,12 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/between_cutscenes.gd" id="1_2pmfa"]
 [ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="1_fe47r"]
+[ext_resource type="Texture2D" uid="uid://d1o60ccg3x7tj" path="res://assets/bgs/inbetween_bg.png" id="3_xi34e"]
 
-[sub_resource type="Gradient" id="Gradient_vaoh7"]
-colors = PackedColorArray(0, 0, 0.333333, 1, 0, 0, 0.333333, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qmyfg"]
-gradient = SubResource("Gradient_vaoh7")
+[sub_resource type="SpriteFrames" id="SpriteFrames_0xmlp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xi34e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="BetweenCutscenes" type="Control"]
 layout_mode = 3
@@ -19,10 +25,10 @@ grow_vertical = 2
 theme = ExtResource("1_fe47r")
 script = ExtResource("1_2pmfa")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(328, 185.5)
-scale = Vector2(10.4688, 5.95312)
-texture = SubResource("GradientTexture2D_qmyfg")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_0xmlp")
+centered = false
 
 [node name="Score" type="Label" parent="."]
 unique_name_in_owner = true
@@ -32,11 +38,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -47.0
+offset_top = -13.0
+offset_right = 47.0
+offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Bravooo!!!"
+theme_override_colors/font_color = Color(0.0705882, 0.0901961, 0.239216, 1)
+text = "Sample text"
 horizontal_alignment = 1

@@ -22,8 +22,8 @@ texture = ExtResource("3_7il0q")
 centered = false
 
 [node name="Bugs" type="Sprite2D" parent="."]
-position = Vector2(318, 189)
-scale = Vector2(0.421875, 0.421875)
+position = Vector2(348, 202)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_j51j2")
 
 [node name="Camera2D" type="Camera2D" parent="."]

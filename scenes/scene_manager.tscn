@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4rmc4llx8n4e"]
+[gd_scene load_steps=9 format=3 uid="uid://b4rmc4llx8n4e"]
 
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_olmep"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_gp0t8"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://ccli0umkxme1b" path="res://assets/ui/input_displayer.png" id="3_t2sqh"]
 [ext_resource type="Script" path="res://scripts/saver_loader.gd" id="3_vhwh1"]
 [ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="4_ql2q8"]
+[ext_resource type="FontFile" uid="uid://dfc4ft2k7b28s" path="res://assets/font/m5x7.ttf" id="5_qtfpe"]
+[ext_resource type="Texture2D" uid="uid://82qwdcuaq43v" path="res://assets/ui/arrow_icon.png" id="6_wgp0a"]
 
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_olmep")
@@ -15,6 +17,42 @@ reset_memories_rate = 5
 [node name="InputDisplayer" type="Sprite2D" parent="."]
 z_index = 99
 texture = ExtResource("3_t2sqh")
+centered = false
+
+[node name="Label" type="Label" parent="InputDisplayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_ql2q8")
+theme_override_fonts/font = ExtResource("5_qtfpe")
+theme_override_font_sizes/font_size = 16
+text = "        / WASD: Muovi selez. | Indietro / X: Ripristina selez. | Invio / Z: Conferma selez. | ESC / TAB : Apri menu | O: ??"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpArrow" type="Sprite2D" parent="InputDisplayer"]
+position = Vector2(10, 5)
+texture = ExtResource("6_wgp0a")
+centered = false
+
+[node name="LeftArrow" type="Sprite2D" parent="InputDisplayer"]
+position = Vector2(19, 12)
+rotation = 4.71239
+texture = ExtResource("6_wgp0a")
+centered = false
+
+[node name="DownArrow" type="Sprite2D" parent="InputDisplayer"]
+position = Vector2(35, 12)
+rotation = -3.14159
+texture = ExtResource("6_wgp0a")
+centered = false
+
+[node name="RightArrow" type="Sprite2D" parent="InputDisplayer"]
+position = Vector2(44, 5)
+rotation = 1.5708
+texture = ExtResource("6_wgp0a")
 centered = false
 
 [node name="Menu" type="Control" parent="."]
