@@ -2,7 +2,7 @@ class_name Boss_Info
 extends Resource
 
 # Informazioni generiche di un personaggio
-@export_category("Player Stats")
+@export_category("Boss Stats")
 @export
 var name : String = "Stencil"
 @export
@@ -17,6 +17,7 @@ var base_spe : int = 100
 var base_eva : int = 5
 @export
 var param_sprite:Texture2D
-
+@export
+var ost:AudioStream
 @export_category("Boss abilities")
 @export var abilities : Array[String]

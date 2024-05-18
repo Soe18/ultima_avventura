@@ -19,6 +19,7 @@ var paused = false
 var ongame = false
 @onready var menu = %Menu
 @onready var saver_loader = %SaverLoader
+@onready var jukebox = %Jukebox
 
 const main_menu := "res://scenes/main_menu.tscn"
 const players_route := "res://scenes/players.tscn"
@@ -40,7 +41,6 @@ func load_next_game():
 		for player_status in players_status:
 			players_status[player_status]["memories"] = default_memories[player_status].duplicate()
 	
-	print_debug(default_memories)
 	ongame = true
 	current_scene.queue_free()
 	players = preload(players_route).instantiate()
@@ -59,7 +59,7 @@ func load_next_game():
 
 # It's better to call signals for it
 func load_between_cutscene():
-	print_debug()
+	#print_debug()
 	ongame = false
 	current_scene.queue_free()
 	players = preload(players_route).instantiate()
@@ -73,6 +73,7 @@ func load_between_cutscene():
 # Manage pause when playing
 func _process(_delta):
 	if Input.is_action_just_pressed("escape") and ongame:
+		jukebox.sfx_menu.play()
 		if not paused:
 			pause_game()
 		else:
@@ -95,15 +96,17 @@ func continue_game():
 	paused = false
 
 func inc_score():
-	print_debug()
+	#print_debug()
 	score = score + 1
+	jukebox.sfx_won.play()
 
 func lose():
-	print_debug()
+	#print_debug()
 	score = -1
+	jukebox.sfx_lose.play()
 
 func get_score() -> int:
-	print_debug()
+	#print_debug()
 	return score
 
 func update_player_status(players_node):
@@ -114,9 +117,9 @@ func update_player_status(players_node):
 		players_status[player.name]["hp"] = player.curr_hp
 		players_status[player.name]["mana"] = player.curr_mana
 		players_status[player.name]["memories"] = player.player_info.subselector.get("Memoria")
-		print_debug(players_status)
+		#print_debug(players_status)
 		index = index + 1
-	print_debug(self.players.get_children())
+	#print_debug(self.players.get_children())
 
 func get_boss_tres():
 	const multiplier = 5
@@ -152,7 +155,7 @@ func full_main_menu_load(first_load):
 			"mana": player.curr_mana,
 			"memories": player.player_info.subselector.get("Memoria")
 		}
-	print_debug(players_status)
+	#print_debug(players_status)
 	# Remove the players, data saved!
 	remove_child(players)
 	# Reset boss index
@@ -179,7 +182,7 @@ func load():
 		score = loaded_data["score"]
 		# I duplicate as it may cause errors not doing so
 		players_status = loaded_data["players_status"].duplicate()
-		print_debug(players_status)
+		#print_debug(players_status)
 		index_boss = loaded_data["index_boss"]
 		var itemlist_arrified = loaded_data["itemlist"]
 		itemlist.itemlist = itemlist_arrified

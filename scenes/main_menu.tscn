@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4hu17kmdmxem"]
+[gd_scene load_steps=9 format=3 uid="uid://c4hu17kmdmxem"]
 
 [ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="1_2mrwr"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_qbeku"]
 [ext_resource type="Texture2D" uid="uid://iohk58lsdeay" path="res://assets/bgs/intro_bg.png" id="3_rkep3"]
 [ext_resource type="Texture2D" uid="uid://c1028vmowa8pr" path="res://assets/ui/logo.png" id="4_tviet"]
+[ext_resource type="AudioStream" uid="uid://bqndqd7afgt7v" path="res://assets/ost/intro.wav" id="5_br87c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26n34"]
 atlas = ExtResource("3_rkep3")
@@ -24,7 +25,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 2.0
+"speed": 3.0
 }]
 
 [node name="MainMenu" type="Control"]
@@ -74,6 +75,10 @@ text = "Carica salvataggio"
 [node name="QuitGame" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 text = "Esci"
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_br87c")
+autoplay = true
 
 [connection signal="pressed" from="HBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="HBoxContainer/LoadGame" to="." method="_on_load_game_pressed"]

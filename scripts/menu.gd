@@ -12,10 +12,13 @@ func set_focus():
 # Signals press
 func _on_continue_pressed():
 	scene_manager.continue_game()
+	scene_manager.jukebox.sfx_confirm.play()
 
 func _on_save_pressed():
 	scene_manager.save()
 	scene_manager.continue_game()
+	scene_manager.jukebox.sfx_confirm.play()
 
 func _on_main_menu_pressed():
 	scene_manager.redirect_to_main_menu()
+	scene_manager.jukebox.sfx_confirm.play()

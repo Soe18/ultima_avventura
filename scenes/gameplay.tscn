@@ -1,16 +1,53 @@
-[gd_scene load_steps=12 format=3 uid="uid://bi36inx7suyd0"]
+[gd_scene load_steps=18 format=3 uid="uid://bi36inx7suyd0"]
 
 [ext_resource type="Script" path="res://scripts/gameplay.gd" id="1_g8qol"]
 [ext_resource type="Resource" uid="uid://dv08yj5wev20t" path="res://data/default_describer.tres" id="2_67u4m"]
 [ext_resource type="Texture2D" uid="uid://dod82jqhiari8" path="res://assets/bgs/gameplay_bg.png" id="3_7il0q"]
 [ext_resource type="Script" path="res://scripts/selector.gd" id="3_ge5t2"]
+[ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://assets/godot/icon.svg" id="4_cqs6p"]
 [ext_resource type="Script" path="res://scripts/descriptor.gd" id="4_ilxao"]
-[ext_resource type="Texture2D" uid="uid://dupqe48ivrlsy" path="res://icon.svg" id="4_j51j2"]
 [ext_resource type="Texture2D" uid="uid://ch7tnt1se4ccu" path="res://assets/ui/menu_box.png" id="4_x5v04"]
 [ext_resource type="PackedScene" uid="uid://cwlrh0ccdn4m1" path="res://scenes/boss.tscn" id="5_hyr7r"]
 [ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="6_8b705"]
 [ext_resource type="Texture2D" uid="uid://c3oby75jjapv7" path="res://assets/ui/pointer.png" id="7_avrdi"]
 [ext_resource type="Script" path="res://scripts/abilities.gd" id="8_yr2s6"]
+[ext_resource type="Texture2D" uid="uid://dblmp6hjpgpxm" path="res://assets/ui/up_arrow.png" id="10_vnu7r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6agpl"]
+atlas = ExtResource("10_vnu7r")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5jsc"]
+atlas = ExtResource("10_vnu7r")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsif5"]
+atlas = ExtResource("10_vnu7r")
+region = Rect2(0, 7, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p74sq"]
+atlas = ExtResource("10_vnu7r")
+region = Rect2(7, 7, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uqbjl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6agpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5jsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsif5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p74sq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_g8qol")
@@ -24,7 +61,7 @@ centered = false
 [node name="Bugs" type="Sprite2D" parent="."]
 position = Vector2(348, 202)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_j51j2")
+texture = ExtResource("4_cqs6p")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(320, 180)
@@ -115,6 +152,24 @@ position = Vector2(195, 335)
 [node name="BottomRight" type="Marker2D" parent="Selector/Markers"]
 position = Vector2(335, 335)
 
+[node name="UpIndicator" type="AnimatedSprite2D" parent="Selector"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(452, 270)
+sprite_frames = SubResource("SpriteFrames_uqbjl")
+autoplay = "default"
+centered = false
+
+[node name="DownIndicator" type="AnimatedSprite2D" parent="Selector"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(459, 350)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_uqbjl")
+autoplay = "default"
+frame_progress = 0.275806
+centered = false
+
 [node name="Boss" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -125,6 +180,9 @@ unique_name_in_owner = true
 script = ExtResource("8_yr2s6")
 
 [node name="AnimationCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="BG_Ost" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 
 [connection signal="timeout" from="AnimationCooldown" to="." method="_on_animation_cooldown_timeout"]

@@ -29,6 +29,7 @@ var boss_tres
 @onready var current_player
 # Lista del selector corrente
 @onready var fields_to_be_shown
+@onready var bg_ost = %BG_Ost
 
 # Indice del player della lista dei personaggi (players)
 var player_index = 0
@@ -53,8 +54,13 @@ func _ready():
 	boss = boss_node.get_child(0)
 	boss.boss_info = boss_tres
 	boss.load_data()
+	
 	# Put players in scene
 	add_child(players_node)
+	
+	# Start boss music
+	bg_ost.stream = boss.boss_info.ost
+	bg_ost.play()
 
 func _process(delta):
 	
@@ -100,12 +106,14 @@ func _process(delta):
 		if Input.is_action_just_pressed("down"):
 			selector.move_down()
 		if Input.is_action_just_pressed("confirm"):
+			scene_manager.jukebox.sfx_confirm.play()
 			if selector.get_field():
 				category_input[player_index] = player_input[player_index]
 				player_input[player_index] = selector.get_field()
 				print_debug(player_input)
 				manage_next_move()
 		if Input.is_action_just_pressed("deny"):
+			scene_manager.jukebox.sfx_cancel.play()
 			previous_selection()
 		# I love eggs
 		if Input.is_action_pressed("easter_egg"):

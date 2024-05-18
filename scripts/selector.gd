@@ -2,13 +2,14 @@ extends Node2D
 
 # '-' means null value, AND cannot be selected
 
-# WORK BEFORE ON CHARACTER CLASS AND DYNAMICALLY LOAD THE MENUS
 var curr_selection = Vector2(0,0)
 var pos_matrix
 var actual_matrix
 var all_elements
 var skipped_rows : int = 0
 @onready var pointer = %Pointer
+@onready var up_indicator = %UpIndicator
+@onready var down_indicator = %DownIndicator
 
 enum SHIFT_ROWS {Up, Down}
 
@@ -19,7 +20,6 @@ func _ready():
 	actual_matrix = [["", ""],
 				["", ""],]
 	update_posix()
-	pass
 
 # DIM of x length of menu
 func get_max_x():
@@ -32,30 +32,25 @@ func move_left():
 	curr_selection.x -= 1
 	check_out_of_bounds()
 	update_posix()
-	pass
 
 func move_right():
 	curr_selection.x += 1
 	check_out_of_bounds()
 	update_posix()
-	pass
 
 func move_up():
 	curr_selection.y -= 1
 	check_out_of_bounds()
 	update_posix()
-	pass
 
 func move_down():
 	curr_selection.y += 1
 	check_out_of_bounds()
 	update_posix()
-	pass
 
 # Aggiorna la posizione del puntatore
 func update_posix():
 	pointer.position = pos_matrix[curr_selection.y][curr_selection.x].position
-	pass
 
 # Controlla che puntatore non vada fuori dal menu
 func check_out_of_bounds():
@@ -69,9 +64,8 @@ func check_out_of_bounds():
 	if curr_selection.y > get_max_y():
 		curr_selection.y = get_max_y()
 		invisible_rows_manager(SHIFT_ROWS.Down)
-	pass
 
-# ???
+# Show the upper or below row
 func invisible_rows_manager(shiftrows):
 	if shiftrows == SHIFT_ROWS.Up:
 		skipped_rows -= 1
@@ -81,8 +75,20 @@ func invisible_rows_manager(shiftrows):
 		skipped_rows += 1
 		if skipped_rows >= (all_elements.size()/2)-2:
 			skipped_rows = (all_elements.size()/2)-2
-	pass
+	show_suggestors()
 
+func show_suggestors():
+	# Check up_indicator
+	if skipped_rows > 0:
+		up_indicator.visible = true
+	else:
+		up_indicator.visible = false
+	# Check down_indicator
+	if all_elements.size() > 4 and skipped_rows != (all_elements.size()/2)-2:
+		# if there are more than 4 elems and we're not on last row
+		down_indicator.visible = true
+	else:
+		down_indicator.visible = false
 
 func update_fields(array):
 	while array.size() < 4:
@@ -92,7 +98,7 @@ func update_fields(array):
 		array.append("-")
 	all_elements = array
 	update_view()
-	pass
+	show_suggestors()
 
 func update_view():
 	# Update actual_matrix	
@@ -106,7 +112,6 @@ func update_view():
 	$TopRightLabel.text = actual_matrix[0][1]
 	$BottomLeftLabel.text = actual_matrix[1][0]
 	$BottomRightLabel.text = actual_matrix[1][1]
-	pass
 
 # Returns false if value is "-"
 func get_field():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4rmc4llx8n4e"]
+[gd_scene load_steps=17 format=3 uid="uid://b4rmc4llx8n4e"]
 
 [ext_resource type="Script" path="res://scripts/scene_manager.gd" id="1_olmep"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_gp0t8"]
@@ -8,6 +8,14 @@
 [ext_resource type="Theme" uid="uid://ccaobqrsog5j0" path="res://assets/ui/main_theme.tres" id="4_ql2q8"]
 [ext_resource type="FontFile" uid="uid://dfc4ft2k7b28s" path="res://assets/font/m5x7.ttf" id="5_qtfpe"]
 [ext_resource type="Texture2D" uid="uid://82qwdcuaq43v" path="res://assets/ui/arrow_icon.png" id="6_wgp0a"]
+[ext_resource type="Script" path="res://scripts/jukebox.gd" id="9_wryjk"]
+[ext_resource type="AudioStream" uid="uid://c3ur0qnt5i5b2" path="res://assets/sfx/cancel.wav" id="10_v3rdy"]
+[ext_resource type="AudioStream" uid="uid://cn6rcyceougc3" path="res://assets/sfx/move.wav" id="11_oovhp"]
+[ext_resource type="AudioStream" uid="uid://4i5aucox2h8g" path="res://assets/sfx/confirm.wav" id="12_hqb2s"]
+[ext_resource type="AudioStream" uid="uid://bwbnogw2yfy6o" path="res://assets/sfx/menu.wav" id="13_orex6"]
+[ext_resource type="AudioStream" uid="uid://dmnauqjdl33sm" path="res://assets/sfx/hit.wav" id="14_ggms0"]
+[ext_resource type="AudioStream" uid="uid://bb2qej1jnq70q" path="res://assets/sfx/won.wav" id="15_7d3j7"]
+[ext_resource type="AudioStream" uid="uid://bilmm8i2xovmn" path="res://assets/sfx/lose.wav" id="16_rlefh"]
 
 [node name="SceneManager" type="Node"]
 script = ExtResource("1_olmep")
@@ -102,6 +110,31 @@ text = "Esci"
 [node name="SaverLoader" type="Node" parent="Utils"]
 unique_name_in_owner = true
 script = ExtResource("3_vhwh1")
+
+[node name="Jukebox" type="Node" parent="Utils"]
+unique_name_in_owner = true
+script = ExtResource("9_wryjk")
+
+[node name="sfx_cancel" type="AudioStreamPlayer2D" parent="Utils/Jukebox"]
+stream = ExtResource("10_v3rdy")
+
+[node name="sfx_move" type="AudioStreamPlayer2D" parent="Utils/Jukebox"]
+stream = ExtResource("11_oovhp")
+
+[node name="sfx_confirm" type="AudioStreamPlayer2D" parent="Utils/Jukebox"]
+stream = ExtResource("12_hqb2s")
+
+[node name="sfx_menu" type="AudioStreamPlayer2D" parent="Utils/Jukebox"]
+stream = ExtResource("13_orex6")
+
+[node name="sfx_hit" type="AudioStreamPlayer2D" parent="Utils/Jukebox"]
+stream = ExtResource("14_ggms0")
+
+[node name="sfx_won" type="AudioStreamPlayer2D" parent="Utils/Jukebox"]
+stream = ExtResource("15_7d3j7")
+
+[node name="sfx_lose" type="AudioStreamPlayer2D" parent="Utils/Jukebox"]
+stream = ExtResource("16_rlefh")
 
 [connection signal="pressed" from="Menu/VBox/Continue" to="Menu" method="_on_continue_pressed"]
 [connection signal="pressed" from="Menu/VBox/Save" to="Menu" method="_on_save_pressed"]

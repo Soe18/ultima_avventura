@@ -10,7 +10,9 @@ var player
 var target
 
 # For now, it just start a timer to prevent spam...
-func always_at_end_attack():
+func always_at_end_attack(dmg_attack: bool = false):
+	if dmg_attack:
+		g.scene_manager.jukebox.sfx_hit.play()
 	anim_cooldown.start()
 
 func basic_damage_formula(sender_atk, strength, receiver_def):
@@ -122,7 +124,7 @@ func do_recover():
 	player.use_mana(-mana_recovered)
 	player.receive_damage(-hp_recovered)
 	
-	# You don't need to know what is done here, just put it!
+	# Always put it, put true if attack does damage
 	always_at_end_attack()
 
 # Example player ability
@@ -162,8 +164,8 @@ func do_fuoca(i_want_to_do_it : bool = true):
 		if a_player != player and a_player.curr_hp > 0:
 			a_player.use_mana(-mana_recover)
 	
-	# You don't need to know what is done here, just put it!
-	always_at_end_attack()
+	# Always put it, put true if attack does damage
+	always_at_end_attack(true)
 
 # Example boss ability
 func do_taglio():
@@ -180,8 +182,8 @@ func do_taglio():
 	target.receive_damage(damage_value)
 	# Display at the top the result of your action
 	descriptor.display_effects(player.boss_info.name+" ha fatto "+str(damage_value)+" danni a "+target.player_info.name+"!")
-	# You don't need to know what is done here, just put it!
-	always_at_end_attack()
+	# Always put it, put true if attack does damage
+	always_at_end_attack(true)
 
 func do_tuonaga(i_want_to_do_it : bool = true):
 	const damage_multiplyer = 1.6
@@ -206,7 +208,7 @@ func do_tuonaga(i_want_to_do_it : bool = true):
 	# Add, if you want, some special effects here
 	player.change_atk(attack_addition)
 	
-	always_at_end_attack()
+	always_at_end_attack(true)
 
 func do_fulmato(i_want_to_do_it : bool = true):
 	var damage_multiplyer = 1+(player.curr_mana/player.player_info.base_mana)
@@ -225,7 +227,7 @@ func do_fulmato(i_want_to_do_it : bool = true):
 	player.use_mana(player.player_info.base_mana)
 
 	descriptor.display_effects(player.player_info.name+" ha concentrato tutte le sue forze in un unico pungo da "+str(damage_value)+" danni a "+g.boss.boss_info.name+".")	
-	always_at_end_attack()
+	always_at_end_attack(true)
 
 func do_distrai(i_want_to_do_it : bool = true):
 	const damage_multiplyer = 1.2
@@ -250,7 +252,7 @@ func do_distrai(i_want_to_do_it : bool = true):
 	# Add, if you want, some special effects here
 	g.boss.change_def(debuff_def)
 	
-	always_at_end_attack()
+	always_at_end_attack(true)
 
 func do_hachi(i_want_to_do_it : bool = true):
 	const buff_atk = 300
@@ -327,7 +329,7 @@ func do_liv(i_want_to_do_it : bool = true):
 	g.boss.receive_damage(damage_value)
 
 	descriptor.display_effects(player.player_info.name+" ha lanciato la sua freccia più potente, causando "+str(damage_value)+" danni a "+g.boss.boss_info.name+".")
-	always_at_end_attack()
+	always_at_end_attack(true)
 
 func do_hideki(i_want_to_do_it : bool = true):
 	const buff_atk = 20
@@ -339,7 +341,7 @@ func do_hideki(i_want_to_do_it : bool = true):
 	descriptor.display_effects(player.player_info.name+" ha ricordato il suo idolo dell`infanzia. Recupera tutta la vita, il mana e aumenta il suo attacco.")
 	
 	# Add, if you want, some special effects here
-	player.set_health(player.player_info.base_health)
+	player.set_health(player.player_info.base_hp)
 	player.set_mana(player.player_info.base_mana)
 	player.change_atk(buff_atk)
 	always_at_end_attack()
@@ -371,7 +373,7 @@ func do_tonfo():
 	# Display at the top the result of your action
 	descriptor.display_effects(player.boss_info.name+" si è lanciato a tuffo sugli avventurieri. Sono stati tutti colpiti.")
 	# You don't need to know what is done here, just put it!
-	always_at_end_attack()
+	always_at_end_attack(true)
 
 func do_morso():
 	remove_child(animation)
@@ -388,7 +390,7 @@ func do_morso():
 	target.change_spe(-debuff_spe)
 	
 	# You don't need to know what is done here, just put it!
-	always_at_end_attack()
+	always_at_end_attack(true)
 
 func do_ragnatela():
 	remove_child(animation)
