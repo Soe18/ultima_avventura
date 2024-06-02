@@ -7,8 +7,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Soe18/CuddlyCat_Inc">
-	<!-- Logo lì sotto -->
-	<img src="assets/ui/logo.png" alt="Ultima Avventura">
+	<img src="images/logo_2x.png" alt="Ultima Avventura">
   </a>
 
   <h3 align="center"> Ultima avventura </h3>
@@ -44,9 +43,11 @@ Ultima avventura è un gioco rpg a turni il quale obiettivo è quello di sopravv
 Un grupp**o** di avventurieri in missi**o**ne si ritr**o**va in una apparente stanza del tes**o**r**o**. Alla vista di un en**o**rme tes**o**r**o**, il gi**o**vane mag**o** dai capelli vi**o**la del grupp**o** è intrepid**o** ad aprirl**o**, ma n**o**n si acc**o**rge della trapp**o**la. Appena il baule viene apert**o**, tutti c**o**l**o**r**o** che si ritr**o**van**o** nella stanza veng**o**n**o** spediti in un’altra dimensi**o**ne. Veng**o**n**o** p**o**rtati nel n**o**str**o** m**o**nd**o**, s**o**ltant**o**… en**o**rmemente ridimensi**o**nati. **O**ra s**o**n**o** alti quant**o** un**o** sc**o**iatt**o**l**o** e dev**o**n**o** tr**o**vare un m**o**d**o** di t**o**rnare indietr**o**. Eventualmente n**o**n ce la farann**o** mai, in quant**o** il gi**o**c**o** andrà avanti all’infinit**o** e sarann**o** quindi c**o**stretti, prima **o** p**o**i, a m**o**rire. Vivi la l**o**r**o** ultima avventura.
 
 ### Azioni
-All'avvio, ci si ritroverà nella seguente schermata:
+All'avvio, ci si ritroverà nella seguente schermata:<br>
+<img src="images/main_menu.png" width="480px">
 
-Avviando il gioco, queste saranno le opzioni possibili:
+Avviando il gioco, queste saranno le opzioni possibili:<br>
+<img src="images/actions.png" width="452px">
 
 ### Scopri i personaggi
 <table>
@@ -58,16 +59,16 @@ Avviando il gioco, queste saranno le opzioni possibili:
   <tr>
 	<td>
   	<div align="center">
-    	<img src="assets/players/arata.png" width="140px">
+    	<img src="images/arata_2x.png">
   	</div>
 	</td>
 	<td>
   	<div align="center">
-    	<img src="assets/players/asphile.png" width="140px">
+    	<img src="images/asphile_2x.png">
   	</div></td>
 	<td>
   	<div align="center">
-    	<img src="assets/players/kan.png" width="140px">
+    	<img src="images/kan_2x.png">
   	</div>
 	</td>
   </tr>
@@ -79,9 +80,9 @@ Avviando il gioco, queste saranno le opzioni possibili:
 </table>
 
 ### Tecnologie utilizzate
-* Godot: <br>
+* [Godot](https://godotengine.org/): <br>
 Game engine utilizzato per lo sviluppo del videogioco. Utilizzata l'ultima versione di Godot per la produzione (v. 4.2.2).
-* Piskel: <br>
+* [Piskel](https://www.piskelapp.com/): <br>
 Pixel art editor che consente di creare animazioni e assets grafici.
 
 ## Scaricare e installare
@@ -127,5 +128,5 @@ La sua natura [FOSS](https://it.wikipedia.org/wiki/Free_and_Open_Source_Software
 Verrà rilasciata una guida in futuro per "Come modificare Ultima Avventura", in quanto il gioco è ancora in modalità **BETA**.
 
 ## Crediti
-Grazie a Daniel Linssen per il font utilizzato: [m5x7](https://managore.itch.io/m5x7).
+Grazie a Daniel Linssen per il font utilizzato: [m5x7](https://managore.itch.io/m5x7).<br>
 Grazie ad AddValue per l'occasione offerta.
